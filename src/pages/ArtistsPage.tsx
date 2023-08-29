@@ -44,7 +44,7 @@ const ArtistsPageSkeleton = () => {
           <Skeleton className="h-3 w-32 rounded-md lg:h-6 lg:w-48" />
         </div>
         <div className="flex w-full justify-between">
-          {createEmptyArray(isMobile ? 3 : 9).map((skeleton, index) => {
+          {createEmptyArray(isMobile ? 3 : 9).map((index) => {
             return (
               <div
                 key={index}
@@ -63,7 +63,7 @@ const ArtistsPageSkeleton = () => {
           <Skeleton className="h-3 w-32 rounded-md lg:h-6 lg:w-48" />
         </div>
         <div className="flex w-full justify-between">
-          {createEmptyArray(isMobile ? 3 : 9).map((skeleton, index) => {
+          {createEmptyArray(isMobile ? 3 : 9).map((index) => {
             return (
               <div
                 key={index}
@@ -82,7 +82,7 @@ const ArtistsPageSkeleton = () => {
           <Skeleton className="h-3 w-32 rounded-md lg:h-6 lg:w-48" />
         </div>
         <div className="flex w-full justify-between">
-          {createEmptyArray(isMobile ? 3 : 9).map((skeleton, index) => {
+          {createEmptyArray(isMobile ? 3 : 9).map((index) => {
             return (
               <div
                 key={index}

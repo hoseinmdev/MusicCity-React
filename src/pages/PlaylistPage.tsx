@@ -70,7 +70,7 @@ const PlaylistPageSkeleton = () => {
   return (
     <div className="flex h-full w-full flex-col justify-start gap-12 p-4 lg:p-8">
       <div className="flex w-full items-center justify-center gap-3">
-        {createEmptyArray(1).map((skeleton, index) => {
+        {createEmptyArray(1).map((index) => {
           return (
             <div
               key={index}
@@ -87,7 +87,7 @@ const PlaylistPageSkeleton = () => {
         })}
       </div>
       <div className="flex w-full items-center justify-between gap-3 lg:justify-start">
-        {createEmptyArray(1).map((skeleton, index) => {
+        {createEmptyArray(1).map((index) => {
           return (
             <div
               key={index}
@@ -100,7 +100,7 @@ const PlaylistPageSkeleton = () => {
         })}
       </div>
       <div className="flex w-full flex-col items-center justify-center gap-3 ">
-        {createEmptyArray(isMobile ? 3 : 9).map((skeleton, index) => {
+        {createEmptyArray(isMobile ? 3 : 9).map((index) => {
           return (
             <div
               key={index}

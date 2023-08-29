@@ -6,17 +6,17 @@ import { TRACK_PAGE } from "@/pathes";
 type TrackLineProps = {
   musicName: string;
   singer: string;
-  imageUrl: string|undefined;
-  url:string
+  imageUrl: string | undefined;
+  url: string;
 };
 
 const TrackLine: React.FC<TrackLineProps> = ({
   musicName,
   singer,
   imageUrl,
-  url
+  url,
 }) => {
-  const {playlist} = useParams()
+  const { playlist } = useParams();
   const playingTrack = PlayedTrack();
   return (
     <Link

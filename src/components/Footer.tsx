@@ -8,8 +8,8 @@ import { FaTelegram } from "react-icons/fa6";
 
 const Footer: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center gap-4 p-4 w-full">
-      <div className="flex w-full items-center justify-end gap-3 text-xl ">
+    <div className="flex w-full flex-col items-center justify-center gap-4 p-4">
+      <div className="flex w-full items-center justify-start gap-3 text-xl ">
         <button className="text-white opacity-50 hover:scale-110 hover:text-white hover:opacity-100">
           <AiFillInstagram />
         </button>
@@ -23,12 +23,12 @@ const Footer: React.FC = () => {
           <FaTelegram />
         </button>
       </div>
-      <div className="flex w-full flex-col flex-wrap items-start justify-center gap-2 text-sm">
+      <div className="flex w-full flex-col flex-wrap items-end justify-center gap-2 text-sm">
         <button className="text-white opacity-50  hover:text-white hover:opacity-100">
-          شماره تماس : 989222365685+
+          + شماره تماس : 989222365685
         </button>
         <button className="text-white opacity-50  hover:text-white hover:opacity-100">
-          ایمیل : hoseinmdev@gmail.com
+          hoseinmdev@gmail.com : ایمیل
         </button>
       </div>
       <div className="flex w-full cursor-default flex-col items-center justify-center gap-1  border-t border-gray-500 pt-2 text-sm text-white opacity-50 hover:text-white hover:opacity-100">

@@ -23,7 +23,7 @@ const TrackBox: React.FC<TrackBoxProps> = ({
     <Link
       to={`/${TRACK_PAGE}/${musicName}`}
       state={{ url }}
-      className={`group/trackBox relative flex w-32  cursor-pointer flex-col items-start justify-between gap-2 text-sm text-white lg:w-auto lg:text-base`}
+      className={`group/trackBox relative flex w-32  lg:cursor-pointer flex-col items-start justify-between gap-2 text-sm text-white lg:w-auto lg:text-base`}
     >
       <img
         className={`h-full w-full rounded-lg hover:opacity-70 ${

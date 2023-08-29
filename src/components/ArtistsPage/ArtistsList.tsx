@@ -28,7 +28,7 @@ const ArtistsList: React.FC<{
         spaceBetween={isMobile ? 10 : 30}
         slidesPerView={isMobile ? 3.4 : 9}
       >
-        <div className="flex w-full cursor-pointer justify-between gap-4">
+        <div className="flex w-full lg:cursor-pointer justify-between gap-4">
           {artists.map((artist) => {
             if (artist.genre === type) {
               return (

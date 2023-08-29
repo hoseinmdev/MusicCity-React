@@ -1,15 +1,15 @@
-import './App.css'
-import SiteLayout from './layout/SiteLayout'
+import "./App.css";
+import Router from "./Router";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
   return (
     <>
-
-      <SiteLayout/>
-
+      <Router />
+      <ToastContainer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -220,7 +220,7 @@ const MusicPlayerControllers: React.FC<{
         <div onClick={() => changeMusic("next")} className="lg:cursor-pointer">
           <AiFillStepForward />
         </div>
-        <div>
+        <div className="opacity-20">
           <BiShuffle />
         </div>
       </div>

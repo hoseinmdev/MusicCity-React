@@ -162,8 +162,8 @@ const MusicPlayerControllers: React.FC<{
           if (musicTimeLineRef.current) {
             const value = Number(musicTimeLineRef.current.value);
             const songDuration = Math.floor(song.duration);
-            const second = value + 1;
-            musicTimeLineRef.current.value = `${second}`;
+            // const second = song.duration ? value + 1 : 0;
+            // musicTimeLineRef.current.value = `${second}`;
             musicCurrentTimeTimer();
             if (value === songDuration) stopMusic();
           }
@@ -198,7 +198,7 @@ const MusicPlayerControllers: React.FC<{
           min={0}
           ref={musicTimeLineRef}
           step={1}
-          className="w-full cursor-pointer appearance-none bg-transparent outline-none [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:h-[8px] [&::-webkit-slider-thumb]:w-[7px] [&::-webkit-slider-thumb]:scale-150 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
+          className="w-full appearance-none bg-transparent outline-none lg:cursor-pointer [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-black/25 [&::-webkit-slider-thumb]:h-[8px] [&::-webkit-slider-thumb]:w-[7px] [&::-webkit-slider-thumb]:scale-150 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
           type="range"
         />
         <div className="flex w-full justify-between">
@@ -211,13 +211,13 @@ const MusicPlayerControllers: React.FC<{
         <div className="opacity-20">
           <BsRepeat />
         </div>
-        <div onClick={() => changeMusic("prev")} className="cursor-pointer">
+        <div onClick={() => changeMusic("prev")} className="lg:cursor-pointer">
           <AiFillStepBackward />
         </div>
-        <div onClick={playPauseHandler} className="cursor-pointer text-3xl">
+        <div onClick={playPauseHandler} className="text-3xl lg:cursor-pointer">
           {renderPlayIcon()}
         </div>
-        <div onClick={() => changeMusic("next")} className="cursor-pointer">
+        <div onClick={() => changeMusic("next")} className="lg:cursor-pointer">
           <AiFillStepForward />
         </div>
         <div>
@@ -246,7 +246,7 @@ const MusicName = () => {
         <p className="text-sm opacity-70">{trackToPlay?.singer}</p>
       </div>
       <div
-        className="flex cursor-pointer flex-col  items-center justify-center gap-2"
+        className="flex flex-col items-center  justify-center gap-2 lg:cursor-pointer"
         onClick={() => setLiked(!liked)}
       >
         <div className="text-2xl">

@@ -22,9 +22,7 @@ const BrowsePage: React.FC = () => {
           {tracks.map((track) => {
             return (
               <TrackLine
-                imageUrl={track.imageUrl}
-                musicName={track.musicName}
-                singer={track.singer}
+              {...track}
                 key={track.imageUrl}
               />
             );

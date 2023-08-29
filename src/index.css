@@ -1,9 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: VazirFont;
+  src: url(assets/fonts/Vazir-FD.ttf);
+}
+
 * {
   transition: 0.2s;
-  font-family: "Vazir";
+  font-family: "VazirFont";
 }
 .hideScrollbar {
   -ms-overflow-style: none; /* Internet Explorer 10+ */

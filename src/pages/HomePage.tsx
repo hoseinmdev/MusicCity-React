@@ -9,7 +9,7 @@ import TracksList from "@/components/HomePage/TracksList";
 import { playLists } from "@/db/playLists";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { RootState } from "@/sote";
+import { RootState } from "@/store";
 import Footer from "@/components/Footer";
 
 const HomePage: React.FC = () => {
@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
             <PlayLists playListsTitle="All Playlists" playLists={playLists} />
             <TracksList tracks={tracks} musicsState="new" title="New Songs" />
             <TracksList tracks={tracks} musicsState="top" title="Top Songs" />
-            <div className="lg:hidden w-full">
+            <div className="w-full lg:hidden">
               <Footer />
             </div>
           </div>

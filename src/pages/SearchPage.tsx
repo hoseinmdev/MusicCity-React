@@ -3,7 +3,7 @@ import { TrackLine } from "@/components/common";
 import Skeleton from "@/components/common/Skeleton";
 import { genres, moods } from "@/db/genreMoods";
 import SiteLayout from "@/layout/SiteLayout";
-import { RootState } from "@/sote";
+import { RootState } from "@/store";
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { useSelector } from "react-redux";
@@ -63,7 +63,7 @@ const SearchPage: React.FC = () => {
               {foundTracks?.map((track) => {
                 return (
                   <TrackLine
-                  url={track.url}
+                    url={track.url}
                     imageUrl={track.imageUrl}
                     musicName={track.musicName}
                     singer={track.singer}

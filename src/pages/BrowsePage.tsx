@@ -1,7 +1,7 @@
 import { TrackLine } from "@/components/common";
 import Skeleton from "@/components/common/Skeleton";
 import SiteLayout from "@/layout/SiteLayout";
-import { RootState } from "@/sote";
+import { RootState } from "@/store";
 import createEmptyArray from "@/utils/createEmptyArray";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -15,7 +15,7 @@ const BrowsePage: React.FC = () => {
   return (
     <SiteLayout>
       {show ? (
-        <div className=" p-4 flex w-full flex-col items-start justify-start gap-5 pt-14 pb-24">
+        <div className=" flex w-full flex-col items-start justify-start gap-5 p-4 pb-24 pt-14">
           <p className="fixed left-0 top-0 z-30 flex w-full items-center justify-center rounded-b-2xl bg-neutral-800 p-2 text-lg lg:relative lg:justify-start lg:bg-transparent">
             Songs for you :)
           </p>

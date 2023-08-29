@@ -93,7 +93,7 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
       setAllTracks(localTracks);
     }
   }, []);
-  
+
   useEffect(() => {
     // return () => {
     //   song.load();
@@ -121,12 +121,12 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
               song.load();
               setTimeout(() => setPlayTrack(false), 300);
             }}
-            className="flex w-full cursor-pointer items-center justify-between text-3xl"
+            className="flex w-full items-center justify-between text-3xl lg:cursor-pointer"
           >
             <AiOutlineClose />
           </div>
           <img
-            className="w-3/4 cursor-pointer rounded-2xl hover:animate-pulse lg:w-[80%]"
+            className="w-3/4 rounded-2xl hover:animate-pulse lg:w-[80%] lg:cursor-pointer"
             src={trackToPlay?.imageUrl}
             alt=""
           />

@@ -16,7 +16,7 @@ const PlaylistBox: React.FC<PlaylistBoxProps> = ({
   return (
     <Link
       to={`/${PLAYLIST_PAGE}/${title}`}
-      className="flex lg:cursor-pointer flex-col items-center justify-between gap-2 text-base text-white hover:opacity-70 "
+      className="flex flex-col items-center justify-between gap-2 text-base text-white hover:opacity-70 lg:lg:cursor-pointer "
     >
       <img className="rounded-xl" src={imageUrl} alt="" />
       <p className="text-sm lg:text-base">{title}</p>

@@ -9,7 +9,7 @@ interface Artist {
   name: string;
   followers: number;
   imageUrl: string;
-  genre:string
+  genre: string;
 }
 type ArtistsList = Artist[];
 
@@ -17,7 +17,7 @@ const ArtistsList: React.FC<{
   artists: ArtistsList;
   title: string;
   type: string;
-}> = ({ artists, title , type}) => {
+}> = ({ artists, title, type }) => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   return (
@@ -28,7 +28,7 @@ const ArtistsList: React.FC<{
         spaceBetween={isMobile ? 10 : 30}
         slidesPerView={isMobile ? 3.4 : 9}
       >
-        <div className="flex w-full lg:cursor-pointer justify-between gap-4">
+        <div className="flex w-full justify-between gap-4 lg:lg:cursor-pointer">
           {artists.map((artist) => {
             if (artist.genre === type) {
               return (

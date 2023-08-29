@@ -1,12 +1,16 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import Main from "../components/Main";
 import Navbar from "../components/Navbar";
 
-const SiteLayout: FC = () => {
+interface SiteLayoutProps {
+  children: ReactNode;
+}
+
+const SiteLayout: FC<SiteLayoutProps> = ({ children }) => {
   return (
-    <div className="flex w-full">
+    <div className="flex w-full h-screen">
       <Navbar />
-      <Main />
+      <Main>{children}</Main>
     </div>
   );
 };

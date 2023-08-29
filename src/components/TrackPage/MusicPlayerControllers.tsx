@@ -142,8 +142,9 @@ const MusicPlayerControllers: React.FC<{
           if (musicTimeLineRef.current)
             musicTimeLineRef.current.max = String(song.duration);
           if (musicDuration.current)
-            musicDuration.current.innerText = `${minutes}:${seconds}`;
-
+            musicDuration.current.innerText = song.duration
+              ? `${minutes}:${seconds}`
+              : "00:00";
 
           if (value === songDuration) stopMusic();
         }
@@ -155,18 +156,19 @@ const MusicPlayerControllers: React.FC<{
     clearInterval(interval.current);
     const target = e.target as HTMLInputElement;
     song.currentTime = Number(target.value);
-
-    if (isPlaying) {
-      interval.current = setInterval(() => {
-        if (musicTimeLineRef.current) {
-          const value = Number(musicTimeLineRef.current.value);
-          const songDuration = Math.floor(song.duration);
-          const second = value + 1;
-          musicTimeLineRef.current.value = `${second}`;
-          musicCurrentTimeTimer();
-          if (value === songDuration) stopMusic();
-        }
-      }, 1000);
+    if (song.duration) {
+      if (isPlaying) {
+        interval.current = setInterval(() => {
+          if (musicTimeLineRef.current) {
+            const value = Number(musicTimeLineRef.current.value);
+            const songDuration = Math.floor(song.duration);
+            const second = value + 1;
+            musicTimeLineRef.current.value = `${second}`;
+            musicCurrentTimeTimer();
+            if (value === songDuration) stopMusic();
+          }
+        }, 1000);
+      }
     }
   };
 

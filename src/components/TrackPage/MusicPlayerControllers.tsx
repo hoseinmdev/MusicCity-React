@@ -12,11 +12,13 @@ import {
   AiOutlineShareAlt,
 } from "react-icons/ai";
 import { BiShuffle } from "react-icons/bi";
-import { BsRepeat } from "react-icons/bs";
+import { BsRepeat, BsRepeat1 } from "react-icons/bs";
 import { useEffect, useRef, useState } from "react";
 import PlayedTrack from "@/utils/trackToPlay";
 import { RiUserHeartLine } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import saveToLocal from "@/utils/saveToLocal";
+import getFromLocal from "@/utils/getFromLocal";
 
 interface Track {
   musicName: string;
@@ -31,10 +33,13 @@ const MusicPlayerControllers: React.FC<{
   setSong: React.Dispatch<React.SetStateAction<HTMLAudioElement>>;
   allTracks: Track[];
 }> = ({ song, setSong, allTracks }) => {
+  const musicPlayerSetting = getFromLocal("musicPlayerSetting");
+
   //States
   const [isPlaying, setIsPlaying] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [repeatIcon, setRepeatIcon] = useState(musicPlayerSetting.repeat);
+  const [shuffleIcon, setShuffleIcon] = useState(musicPlayerSetting.shuffle);
   // Refrenses
   const musicTimeLineRef = useRef<HTMLInputElement>(null);
   const musicTimer = useRef<HTMLParagraphElement>(null);
@@ -58,7 +63,7 @@ const MusicPlayerControllers: React.FC<{
   useEffect(() => {
     playPauseHandler();
     return () => {
-      song.load();
+      song.pause();
     };
   }, [song]);
 
@@ -89,14 +94,33 @@ const MusicPlayerControllers: React.FC<{
       );
     }
   };
-  const stopMusic = () => {
+  const musicEnded = () => {
     if (musicTimeLineRef.current) {
       musicTimeLineRef.current.value = "0";
       setIsPlaying(false);
       clearInterval(interval.current);
     }
-    if (musicTimer.current) {
-      musicTimer.current.innerText = `0:00`;
+    if (musicTimer.current) musicTimer.current.innerText = `0:00`;
+
+    //Start again
+    if (repeatIcon === "one") {
+      playPauseHandler();
+    } else if (repeatIcon === "all") {
+      const currentMusicIndex = allTracks.findIndex(
+        (track) => track.url === location.state.url,
+      );
+      const musicToPlay = allTracks[currentMusicIndex + 1];
+      navigate(
+        { pathname: `/track/${musicToPlay.musicName}` },
+        { state: { url: musicToPlay.url } },
+      );
+    } else if (shuffleIcon === "on") {
+      const randomNumber = Math.floor(Math.random() * allTracks.length);
+      const musicToPlay = allTracks[randomNumber];
+      navigate(
+        { pathname: `/track/${musicToPlay.musicName}` },
+        { state: { url: musicToPlay.url } },
+      );
     }
   };
   const musicCurrentTimeTimer = () => {
@@ -146,7 +170,7 @@ const MusicPlayerControllers: React.FC<{
               ? `${minutes}:${seconds}`
               : "00:00";
 
-          if (value === songDuration) stopMusic();
+          if (value === songDuration) musicEnded();
         }
       }, 1000);
       setIsPlaying(true);
@@ -156,37 +180,108 @@ const MusicPlayerControllers: React.FC<{
     clearInterval(interval.current);
     const target = e.target as HTMLInputElement;
     song.currentTime = Number(target.value);
-    
-      if (isPlaying) {
-        interval.current = setInterval(() => {
-          if (musicTimeLineRef.current) {
-            const value = Number(musicTimeLineRef.current.value);
-            const songDuration = Math.floor(song.duration);
-            const second = song.duration ? value + 1 : value;
-            
-            musicTimeLineRef.current.value = `${second}`;
-            musicCurrentTimeTimer();
-            console.log(song.duration);
-            if (value === songDuration) stopMusic();
-          }
-        }, 1000);
-      }
-    
+
+    if (isPlaying) {
+      interval.current = setInterval(() => {
+        if (musicTimeLineRef.current) {
+          const value = Number(musicTimeLineRef.current.value);
+          const songDuration = Math.floor(song.duration);
+          const second = song.duration ? value + 1 : value;
+
+          musicTimeLineRef.current.value = `${second}`;
+          musicCurrentTimeTimer();
+          console.log(song.duration);
+          if (value === songDuration) musicEnded();
+        }
+      }, 1000);
+    }
   };
 
-  const playedTrack = PlayedTrack();
   const changeMusic = (type: string) => {
-    const currentMusicIndex = allTracks.findIndex(
-      (track) => track.musicName === playedTrack?.musicName,
-    );
-    const musicToPlay =
-      allTracks[
-        type === "next" ? currentMusicIndex + 1 : currentMusicIndex - 1
-      ];
-    navigate(
-      { pathname: `/track/${musicToPlay.musicName}` },
-      { state: { url: musicToPlay.url } },
-    );
+    const musicPlayerSetting = getFromLocal("musicPlayerSetting");
+    if (musicPlayerSetting.shuffle === "on") {
+      console.log("object");
+      const randomNumber = Math.floor(Math.random() * allTracks.length);
+      const musicToPlay = allTracks[randomNumber];
+      navigate(
+        { pathname: `/track/${musicToPlay.musicName}` },
+        { state: { url: musicToPlay.url } },
+      );
+    } else {
+      const currentMusicIndex = allTracks.findIndex(
+        (track) => track.url === location.state.url,
+      );
+      const musicToPlay =
+        allTracks[
+          type === "next" ? currentMusicIndex + 1 : currentMusicIndex - 1
+        ];
+      navigate(
+        { pathname: `/track/${musicToPlay.musicName}` },
+        { state: { url: musicToPlay.url } },
+      );
+    }
+  };
+
+  const repeatIconHandler = () => {
+    const musicPlayerSetting = getFromLocal("musicPlayerSetting");
+
+    if (musicPlayerSetting.repeat === "off")
+      saveToLocal("musicPlayerSetting", {
+        ...musicPlayerSetting,
+        repeat: "all",
+      });
+    else if (musicPlayerSetting.repeat === "all")
+      saveToLocal("musicPlayerSetting", {
+        ...musicPlayerSetting,
+        repeat: "one",
+      });
+    else if (musicPlayerSetting.repeat === "one")
+      saveToLocal("musicPlayerSetting", {
+        ...musicPlayerSetting,
+        repeat: "off",
+      });
+
+    setRepeatIcon(musicPlayerSetting.repeat);
+  };
+  const renderRepeatIcon = () => {
+    const musicPlayerSetting = getFromLocal("musicPlayerSetting");
+
+    if (musicPlayerSetting.repeat === "off")
+      return (
+        <div className="opacity-20">
+          <BsRepeat />
+        </div>
+      );
+    else if (musicPlayerSetting.repeat === "all") return <BsRepeat />;
+    else if (musicPlayerSetting.repeat === "one") return <BsRepeat1 />;
+  };
+
+  const shuffleIconHandler = () => {
+    const musicPlayerSetting = getFromLocal("musicPlayerSetting");
+
+    if (musicPlayerSetting.shuffle === "off")
+      saveToLocal("musicPlayerSetting", {
+        ...musicPlayerSetting,
+        shuffle: "on",
+      });
+    else if (musicPlayerSetting.shuffle === "on")
+      saveToLocal("musicPlayerSetting", {
+        ...musicPlayerSetting,
+        shuffle: "off",
+      });
+
+    setShuffleIcon(musicPlayerSetting.shuffle);
+  };
+  const renderShuffleIcon = () => {
+    const musicPlayerSetting = getFromLocal("musicPlayerSetting");
+
+    if (musicPlayerSetting.shuffle === "off")
+      return (
+        <div className="opacity-20">
+          <BiShuffle />
+        </div>
+      );
+    else if (musicPlayerSetting.shuffle === "on") return <BiShuffle />;
   };
 
   return (
@@ -210,9 +305,7 @@ const MusicPlayerControllers: React.FC<{
       </div>
       {/* PLAY & PAUSE */}
       <div className="flex w-full items-center justify-between text-2xl">
-        <div className="opacity-20">
-          <BsRepeat />
-        </div>
+        <div onClick={repeatIconHandler}>{renderRepeatIcon()}</div>
         <div onClick={() => changeMusic("prev")} className="lg:cursor-pointer">
           <AiFillStepBackward />
         </div>
@@ -222,9 +315,7 @@ const MusicPlayerControllers: React.FC<{
         <div onClick={() => changeMusic("next")} className="lg:cursor-pointer">
           <AiFillStepForward />
         </div>
-        <div className="opacity-20">
-          <BiShuffle />
-        </div>
+        <div onClick={shuffleIconHandler}>{renderShuffleIcon()}</div>
       </div>
 
       <MusicOptions />

@@ -37,7 +37,7 @@ const BrowsePage: React.FC = () => {
 const BrosePageSkeleton = () => {
   return (
     <div className="flex w-full flex-col gap-5 p-4 lg:gap-7 lg:pt-16">
-      {createEmptyArray(11).map((index) => {
+      {createEmptyArray(11).map((_, index) => {
         return <Skeleton key={index} className="h-14 w-full rounded-lg" />;
       })}
     </div>

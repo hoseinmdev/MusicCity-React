@@ -11,6 +11,7 @@ import MoreMusics from "@/components/TrackPage/MoreMusics";
 import FadeBackgroundImage from "@/components/common/FadeBackgroundImage";
 import PlayedTrack from "@/utils/trackToPlay";
 import { playLists } from "@/db/playLists";
+import saveToLocal from "@/utils/saveToLocal";
 
 const TrackPage: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -18,6 +19,7 @@ const TrackPage: React.FC = () => {
   const trackToPlay = PlayedTrack();
 
   useEffect(() => {
+    saveToLocal("musicPlayerSetting", { repeat: "all", shuffle: "off" });
     setTimeout(() => setShow(true), 1500);
   }, []);
   return (
@@ -94,11 +96,6 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
     }
   }, []);
 
-  useEffect(() => {
-    // return () => {
-    //   song.load();
-    // };
-  }, [location]);
 
   const trackToPlay = tracks.find((t) => t.musicName === track);
   return (
@@ -148,7 +145,7 @@ const TrackPageSkeleton = () => {
   return (
     <div className="flex h-full w-full flex-col justify-start gap-12 p-4 lg:p-8">
       <div className="flex w-full items-center justify-center gap-3">
-        {createEmptyArray(1).map((index) => {
+        {createEmptyArray(1).map((_, index) => {
           return (
             <div
               key={index}
@@ -165,7 +162,7 @@ const TrackPageSkeleton = () => {
         })}
       </div>
       <div className="flex w-full items-center justify-between gap-3 lg:justify-start">
-        {createEmptyArray(1).map((index) => {
+        {createEmptyArray(1).map((_, index) => {
           return (
             <div
               key={index}
@@ -178,7 +175,7 @@ const TrackPageSkeleton = () => {
         })}
       </div>
       <div className="flex w-full flex-col items-center justify-center gap-3 ">
-        {createEmptyArray(isMobile ? 3 : 9).map((index) => {
+        {createEmptyArray(isMobile ? 3 : 9).map((_, index) => {
           return (
             <div
               key={index}

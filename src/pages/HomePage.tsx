@@ -16,6 +16,7 @@ const HomePage: React.FC = () => {
   const [show, setShow] = useState(false);
   const tracks = useSelector((state: RootState) => state.tracks.tracks);
   useEffect(() => {
+
     setTimeout(() => {
       toast("🍕 Welcome To Music City :)", {
         autoClose: 2000,
@@ -54,7 +55,7 @@ const HomePageSkeleton = () => {
         <Skeleton className="h-8 w-32 rounded-[6rem]" />
       </div>
       <div className="flex w-full items-center justify-center gap-3">
-        {createEmptyArray(isMobile ? 1 : 4).map((_,index) => {
+        {createEmptyArray(isMobile ? 1 : 4).map((_, index) => {
           return (
             <div
               key={index}
@@ -68,7 +69,7 @@ const HomePageSkeleton = () => {
         })}
       </div>
       <div className="flex w-full items-center justify-center gap-3">
-        {createEmptyArray(isMobile ? 3 : 9).map((_,index) => {
+        {createEmptyArray(isMobile ? 3 : 9).map((_, index) => {
           return (
             <div
               key={index}
@@ -82,7 +83,7 @@ const HomePageSkeleton = () => {
         })}
       </div>
       <div className="hidden w-full items-center justify-center gap-3 lg:flex">
-        {createEmptyArray(isMobile ? 3 : 9).map((_,index) => {
+        {createEmptyArray(isMobile ? 3 : 9).map((_, index) => {
           return (
             <div
               key={index}

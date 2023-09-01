@@ -95,6 +95,9 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
       setAllTracks(localTracks);
     }
   }, []);
+  useEffect(() => {
+    setSong(new Audio(location.state.url))
+  },[location])
 
 
   const trackToPlay = tracks.find((t) => t.musicName === track);
@@ -131,7 +134,6 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
         <MusicPlayerControllers
           allTracks={allTracks}
           song={song}
-          setSong={setSong}
         />
       </div>
       <MoreMusics allTracks={allTracks} />

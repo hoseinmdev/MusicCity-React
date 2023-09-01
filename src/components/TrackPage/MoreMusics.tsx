@@ -18,7 +18,7 @@ const MoreMusics: React.FC<{ allTracks: Track[] }> = ({ allTracks }) => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   const renderMoreTracks = () => {
-    return allTracks.map((track) => {
+    return allTracks.slice(0,15).map((track) => {
       return (
         <TrackLine
           url={track.url}
@@ -34,7 +34,7 @@ const MoreMusics: React.FC<{ allTracks: Track[] }> = ({ allTracks }) => {
     return (
       <Swiper className="h-auto w-full" spaceBetween={10} slidesPerView={2.2}>
         <div className="flex w-full justify-between gap-4">
-          {allTracks.map((track) => {
+          {allTracks.slice(0,15).map((track) => {
             return (
               <SwiperSlide key={track.musicName}>
                 <TrackBox

@@ -20,7 +20,7 @@ export const tracks = [
     musicName: "Jaddeh",
     singer: "Masih & Arash",
     imageUrl:
-      "https://www.ganja2music.com/Image/Post/8.2023/Masih%20And%20Arash%20AP%20-%20Jaddeh.jpg",
+      "https://i1.sndcdn.com/artworks-nidu20CxN0PAMyJT-Ri3fFw-t500x500.jpg",
     url: "https://cdnmrtehran.ir/media/mp3s/01/4d15b91225_808912982603643fa171f5a6033f30ff.mp3",
     state: "new",
   },

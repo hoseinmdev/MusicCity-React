@@ -18,7 +18,6 @@ const HomePage: React.FC = () => {
   const playlists = useSelector(
     (state: RootState) => state.playlists.playlists,
   );
-  console.log(tracks);
   useEffect(() => {
     dispatch(getTracks());
     dispatch(getPlaylists());

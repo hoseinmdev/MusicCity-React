@@ -1,27 +1,22 @@
 import { TRACK_PAGE } from "@/pathes";
-import PlayedTrack from "@/utils/trackToPlay";
+import { ITrack } from "@/redux/Tracks/TracksSlice";
+import PlayedTrack from "@/utils/getTrackFromUrl";
 import React from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
-type TrackBoxProps = {
-  musicName: string;
-  singer: string;
-  imageUrl: string;
-  url: string;
-};
-
-const TrackBox: React.FC<TrackBoxProps> = ({
+const TrackBox: React.FC<ITrack> = ({
   musicName,
   singer,
   imageUrl,
   url,
+  id,
 }) => {
   const playingTrack = PlayedTrack();
 
   return (
     <Link
-      to={`/${TRACK_PAGE}/${musicName}`}
+      to={`/${TRACK_PAGE}/${id}`}
       state={{ url }}
       className={`group/trackBox relative flex w-32  flex-col items-start justify-between gap-2 text-sm text-white lg:w-auto lg:lg:cursor-pointer lg:text-base`}
     >

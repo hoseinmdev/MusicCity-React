@@ -1,21 +1,18 @@
 import { PLAYLIST_PAGE } from "@/pathes";
+import { IPlaylist } from "@/redux/Playlists/PlaylistsSlice";
 import React from "react";
 import { Link } from "react-router-dom";
 
-type PlaylistBoxProps = {
-  title: string;
-  imageUrl: string;
-  followers: number;
-};
 
-const PlaylistBox: React.FC<PlaylistBoxProps> = ({
+const PlaylistBox: React.FC<IPlaylist> = ({
+  id,
   title,
   imageUrl,
   followers,
 }) => {
   return (
     <Link
-      to={`/${PLAYLIST_PAGE}/${title}`}
+      to={`/${PLAYLIST_PAGE}/${id}`}
       className="flex flex-col items-center justify-between gap-2 text-base text-white hover:opacity-70 lg:lg:cursor-pointer "
     >
       <img className="rounded-xl" src={imageUrl} alt="" />

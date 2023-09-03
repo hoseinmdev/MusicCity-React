@@ -1,51 +1,82 @@
 import Slider from "@/components/HomePage/Slider";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import SiteLayout from "@/layout/SiteLayout";
 import Skeleton from "@/components/common/Skeleton";
 import createEmptyArray from "@/utils/createEmptyArray";
 import { useMediaPredicate } from "react-media-hook";
 import PlayLists from "@/components/HomePage/PlayLists";
 import TracksList from "@/components/HomePage/TracksList";
-import { playLists } from "@/db/playLists";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
 import Footer from "@/components/Footer";
-
+import { getTracks } from "@/redux/Tracks/TracksSlice";
+import { getPlaylists } from "@/redux/Playlists/PlaylistsSlice";
 const HomePage: React.FC = () => {
-  const [show, setShow] = useState(false);
-  const tracks = useSelector((state: RootState) => state.tracks.tracks);
+  const dispatch = useDispatch<AppDispatch>();
+  const { tracks, loading } = useSelector((state: RootState) => state.tracks);
+  const playlists = useSelector(
+    (state: RootState) => state.playlists.playlists,
+  );
+  console.log(tracks);
   useEffect(() => {
-
-    setTimeout(() => {
-      toast("🍕 Welcome To Music City :)", {
-        autoClose: 2000,
-        theme: "dark",
-      });
-      setShow(true);
-    }, 1500);
+    dispatch(getTracks());
+    dispatch(getPlaylists());
+    toast("🍕 Welcome To Music City :)", {
+      autoClose: 2000,
+      theme: "dark",
+    });
   }, []);
 
-  return (
-    <>
-      <SiteLayout>
-        {show ? (
+  const renderHomePage = () => {
+    if (loading) {
+      return (
+        <SiteLayout>
+          <HomePageSkeleton />
+        </SiteLayout>
+      );
+    } else if (!loading && tracks.length !== 0) {
+      return (
+        <SiteLayout>
           <div className="flex w-full flex-col items-center justify-center gap-8 p-4 pb-14 lg:gap-10">
             <Slider />
-            <PlayLists playListsTitle="All Playlists" playLists={playLists} />
+            <PlayLists playListsTitle="All Playlists" playLists={playlists} />
             <TracksList tracks={tracks} musicsState="new" title="New Songs" />
             <TracksList tracks={tracks} musicsState="top" title="Top Songs" />
             <div className="w-full lg:hidden">
               <Footer />
             </div>
           </div>
-        ) : (
-          <HomePageSkeleton />
-        )}
-      </SiteLayout>
-    </>
+        </SiteLayout>
+      );
+    } else if (tracks.length === 0) {
+      return (
+        <SiteLayout>
+          <TryAgain />
+        </SiteLayout>
+      );
+    }
+  };
+  return renderHomePage();
+};
+const TryAgain = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const fetchData = () => {
+    dispatch(getTracks());
+  };
+  return (
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3">
+      <p>We have some problems...</p>
+      <button
+        onClick={fetchData}
+        className="rounded-xl bg-neutral-700 px-10 py-2"
+      >
+        Try Again
+      </button>
+    </div>
   );
 };
+
 const HomePageSkeleton = () => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 

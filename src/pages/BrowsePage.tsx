@@ -1,31 +1,27 @@
 import { TrackLine } from "@/components/common";
 import Skeleton from "@/components/common/Skeleton";
 import SiteLayout from "@/layout/SiteLayout";
-import { RootState } from "@/store";
+import { AppDispatch, RootState } from "@/store";
 import createEmptyArray from "@/utils/createEmptyArray";
 import React from "react";
-import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getTracks } from "@/redux/Tracks/TracksSlice";
 const BrowsePage: React.FC = () => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    setTimeout(() => setShow(true), 1500);
-  });
-  const tracks = useSelector((state: RootState) => state.tracks.tracks);
+    dispatch(getTracks());
+  },[]);
+  const { tracks, loading } = useSelector((state: RootState) => state.tracks);
   return (
     <SiteLayout>
-      {show ? (
+      {!loading ? (
         <div className=" flex w-full flex-col items-start justify-start gap-5 p-4 pb-24 pt-14">
           <p className="fixed left-0 top-0 z-30 flex w-full items-center justify-center rounded-b-2xl bg-neutral-800 p-2 text-lg lg:relative lg:justify-start lg:bg-transparent">
             Songs for you :)
           </p>
           {tracks.map((track) => {
-            return (
-              <TrackLine
-              {...track}
-                key={track.imageUrl}
-              />
-            );
+            return <TrackLine {...track} key={track.imageUrl} />;
           })}
         </div>
       ) : (

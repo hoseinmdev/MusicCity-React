@@ -1,23 +1,29 @@
 import FadeBackgroundImage from "@/components/common/FadeBackgroundImage";
 import SiteLayout from "@/layout/SiteLayout";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useMediaPredicate } from "react-media-hook";
 import createEmptyArray from "@/utils/createEmptyArray";
 import Skeleton from "@/components/common/Skeleton";
 import { useParams } from "react-router-dom";
-import { playLists } from "@/db/playLists";
 import { TrackLine } from "@/components/common";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { getPlaylists } from "@/redux/Playlists/PlaylistsSlice";
 
 const PlaylistPage: React.FC = () => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { playlists, loading } = useSelector(
+    (state: RootState) => state.playlists,
+  );
   const { playlist } = useParams();
-  const currentPlaylist = playLists.find((p) => p.title === playlist);
+  const currentPlaylist = playlists.find((p) => p.id === playlist);
   useEffect(() => {
-    setTimeout(() => setShow(true), 1500);
+    dispatch(getPlaylists());
   }, []);
+
   return (
     <SiteLayout>
-      {show ? (
+      {!loading ? (
         <div className="relative flex h-full w-full flex-col">
           <FadeBackgroundImage imageUrl={currentPlaylist?.imageUrl} />
           {/* Content */}
@@ -43,15 +49,7 @@ const PlaylistPage: React.FC = () => {
             <div className="flex h-full w-full flex-col items-center justify-start gap-3">
               {currentPlaylist?.tracks
                 ? currentPlaylist?.tracks.map((track) => {
-                    return (
-                      <TrackLine
-                        url={track.url}
-                        musicName={track.musicName}
-                        imageUrl={track.imageUrl}
-                        singer={track.singer}
-                        key={track.imageUrl}
-                      />
-                    );
+                    return <TrackLine key={track.id} {...track} />;
                   })
                 : ""}
             </div>

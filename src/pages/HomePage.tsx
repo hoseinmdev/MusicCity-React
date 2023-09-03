@@ -6,7 +6,7 @@ import createEmptyArray from "@/utils/createEmptyArray";
 import { useMediaPredicate } from "react-media-hook";
 import PlayLists from "@/components/HomePage/PlayLists";
 import TracksList from "@/components/HomePage/TracksList";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import Footer from "@/components/Footer";
@@ -21,10 +21,10 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     dispatch(getTracks());
     dispatch(getPlaylists());
-    toast("🍕 Welcome To Music City :)", {
-      autoClose: 2000,
-      theme: "dark",
-    });
+    // toast("🍕 Welcome To Music City :)", {
+    //   autoClose: 2000,
+    //   theme: "dark",
+    // });
   }, []);
 
   const renderHomePage = () => {

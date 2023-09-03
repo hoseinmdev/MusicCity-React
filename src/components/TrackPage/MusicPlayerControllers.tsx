@@ -14,23 +14,16 @@ import {
 // import { BiShuffle } from "react-icons/bi";
 // import { BsRepeat, BsRepeat1 } from "react-icons/bs";
 import { useEffect, useState, useRef } from "react";
-import PlayedTrack from "@/utils/trackToPlay";
+import PlayedTrack from "@/utils/getTrackFromUrl";
 import { RiUserHeartLine } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 // import saveToLocal from "@/utils/saveToLocal";
 import getFromLocal from "@/utils/getFromLocal";
+import { ITrack } from "@/redux/Tracks/TracksSlice";
 
-interface Track {
-  musicName: string;
-  singer: string;
-  imageUrl: string;
-  url: string;
-  genre?: string;
-  state?: string;
-}
 const MusicPlayerControllers: React.FC<{
   song: HTMLAudioElement;
-  allTracks: Track[];
+  allTracks: ITrack[];
 }> = ({ song, allTracks }) => {
   // const musicPlayerSetting = getFromLocal("musicPlayerSetting");
 
@@ -78,8 +71,8 @@ const MusicPlayerControllers: React.FC<{
     if (interval.current) clearInterval(interval.current);
     setMusicCurrentTimeText("00:00");
     setTimeLineValue(0);
-    song.pause()
-    setIsPlaying(false)
+    song.pause();
+    setIsPlaying(false);
   };
   const playPauseHandler = () => {
     if (interval.current) clearInterval(interval.current);
@@ -191,7 +184,7 @@ const MusicPlayerControllers: React.FC<{
       const randomNumber = Math.floor(Math.random() * allTracks.length);
       const musicToPlay = allTracks[randomNumber];
       navigate(
-        { pathname: `/track/${musicToPlay.musicName}` },
+        { pathname: `/track/${musicToPlay.id}` },
         { state: { url: musicToPlay.url } },
       );
     } else {
@@ -203,7 +196,7 @@ const MusicPlayerControllers: React.FC<{
           type === "next" ? currentMusicIndex + 1 : currentMusicIndex - 1
         ];
       navigate(
-        { pathname: `/track/${musicToPlay.musicName}` },
+        { pathname: `/track/${musicToPlay.id}` },
         { state: { url: musicToPlay.url } },
       );
     }

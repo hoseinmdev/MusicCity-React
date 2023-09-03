@@ -1,24 +1,15 @@
 import { SINGLE_ARTIST_PAGE } from "@/pathes";
+import { IArtist } from "@/redux/Artists/ArtistsSlice";
 import React from "react";
 import { useMediaPredicate } from "react-media-hook";
 import { Link } from "react-router-dom";
 
-type ArtistAvatarProps = {
-  title: string;
-  followers: number;
-  imageUrl: string;
-};
-
-const ArtistAvatar: React.FC<ArtistAvatarProps> = ({
-  title,
-  followers,
-  imageUrl,
-}) => {
+const ArtistAvatar: React.FC<IArtist> = ({ followers, id, imageUrl, name }) => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   return (
     <Link
-      to={`/${SINGLE_ARTIST_PAGE}/${title}`}
+      to={`/${SINGLE_ARTIST_PAGE}/${id}`}
       className="flex  flex-col items-center justify-between gap-2 text-sm text-white  lg:text-base"
     >
       <img
@@ -28,11 +19,11 @@ const ArtistAvatar: React.FC<ArtistAvatarProps> = ({
       />
       {isMobile ? (
         <p className="text-sm">
-          {title.length <= 10 ? title : title.slice(0, 9) + "... "}
+          {name.length <= 10 ? name : name.slice(0, 9) + "... "}
         </p>
       ) : (
         <p className="text-base">
-          {title.length <= 15 ? title : title.slice(0, 14) + "... "}
+          {name.length <= 15 ? name : name.slice(0, 14) + "... "}
         </p>
       )}
 

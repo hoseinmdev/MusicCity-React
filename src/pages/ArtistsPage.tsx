@@ -2,36 +2,65 @@
 import Skeleton from "@/components/common/Skeleton";
 import SiteLayout from "@/layout/SiteLayout";
 import createEmptyArray from "@/utils/createEmptyArray";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useMediaPredicate } from "react-media-hook";
 import "swiper/css";
-import {
-  allArtists,
-} from "@/db/artists";
 import ArtistsList from "@/components/ArtistsPage/ArtistsList";
+import { AppDispatch, RootState } from "@/store";
+import { useDispatch, useSelector } from "react-redux";
+import { getArtists } from "@/redux/Artists/ArtistsSlice";
 const ArtistsPage: React.FC = () => {
-  const [show, setShow] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+  const { artists, loading } = useSelector((state: RootState) => state.artists);
+
   useEffect(() => {
-    setTimeout(() => setShow(true), 1500);
+    dispatch(getArtists());
   }, []);
+  const renderArtistsPage = () => {
+    if (loading) {
+      return (
+        <SiteLayout>
+          <ArtistsPageSkeleton />
+        </SiteLayout>
+      );
+    } else if (!loading && artists.length !== 0) {
+      return (
+        <SiteLayout>
+          <div className="flex w-full flex-col items-end gap-8 p-4 pb-20 lg:gap-10 lg:p-9">
+            <ArtistsList artists={artists} title="Populer Pop" type="pop" />
+            <ArtistsList artists={artists} title="Populer Rap" type="rap" />
+            <ArtistsList artists={artists} title="Nostalgic" type="nostalgic" />
+            <ArtistsList artists={artists} title="Sonnati" type="sonnati" />
+            <ArtistsList artists={artists} title="New Pop" type="newPop" />
+          </div>
+        </SiteLayout>
+      );
+    } else if (artists.length === 0) {
+      return (
+        <SiteLayout>
+          <TryAgain />
+        </SiteLayout>
+      );
+    }
+  };
+  return renderArtistsPage();
+};
+
+const TryAgain = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const fetchData = () => {
+    dispatch(getArtists());
+  };
   return (
-    <SiteLayout>
-      {show ? (
-        <div className="flex w-full flex-col items-end gap-8 p-4 pb-20 lg:gap-10 lg:p-9">
-          <ArtistsList artists={allArtists} title="Populer Pop" type="pop" />
-          <ArtistsList artists={allArtists} title="Populer Rap" type="rap" />
-          <ArtistsList
-            artists={allArtists}
-            title="Nostalgic"
-            type="nostalgic"
-          />
-          <ArtistsList artists={allArtists} title="Sonnati" type="sonnati" />
-          <ArtistsList artists={allArtists} title="New Pop" type="newPop" />
-        </div>
-      ) : (
-        <ArtistsPageSkeleton />
-      )}
-    </SiteLayout>
+    <div className="flex h-full w-full flex-col items-center justify-center gap-3">
+      <p>We have some problems...</p>
+      <button
+        onClick={fetchData}
+        className="rounded-xl bg-neutral-700 px-10 py-2"
+      >
+        Try Again
+      </button>
+    </div>
   );
 };
 const ArtistsPageSkeleton = () => {

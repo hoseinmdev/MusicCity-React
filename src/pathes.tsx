@@ -1,10 +1,10 @@
 const HOME_PAGE = "/"
-const ARTISTS_PAGE = "Artists"
-const TRACK_PAGE = "Track";
-const SEARCH_PAGE = "Search";
-const BROWSE_PAGE = "Browse";
-const PLAYLIST_PAGE = "Playlist";
-const SINGLE_ARTIST_PAGE = "SingleArtist";
+const ARTISTS_PAGE = "artists"
+const TRACK_PAGE = "track";
+const SEARCH_PAGE = "search";
+const BROWSE_PAGE = "browse";
+const PLAYLIST_PAGE = "playlist";
+const SINGLE_ARTIST_PAGE = "singleArtist";
 
 export {
   HOME_PAGE,

@@ -5,46 +5,47 @@ import { useMediaPredicate } from "react-media-hook";
 import Skeleton from "@/components/common/Skeleton";
 import createEmptyArray from "@/utils/createEmptyArray";
 import { useLocation, useParams } from "react-router-dom";
-import { tracks } from "@/db/tracks";
 import MusicPlayerControllers from "@/components/TrackPage/MusicPlayerControllers";
 import MoreMusics from "@/components/TrackPage/MoreMusics";
 import FadeBackgroundImage from "@/components/common/FadeBackgroundImage";
-import PlayedTrack from "@/utils/trackToPlay";
-import { playLists } from "@/db/playLists";
 import saveToLocal from "@/utils/saveToLocal";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/store";
+import { ITrack, getTracks } from "@/redux/Tracks/TracksSlice";
+import GetTrackFromUrl from "@/utils/getTrackFromUrl";
 
 const TrackPage: React.FC = () => {
-  const [show, setShow] = useState(false);
+  const { loading } = useSelector((state: RootState) => state.tracks);
+  const dispatch = useDispatch<AppDispatch>();
   const [playTrack, setPlayTrack] = useState(false);
-  const trackToPlay = PlayedTrack();
-
+  const getTrackFromUrl = GetTrackFromUrl();
   useEffect(() => {
+    dispatch(getTracks());
     saveToLocal("musicPlayerSetting", { repeat: "all", shuffle: "off" });
-    setTimeout(() => setShow(true), 1500);
   }, []);
   return (
     <SiteLayout>
-      {show ? (
+      {!loading ? (
         <div className="relative flex h-full w-full flex-col">
           {playTrack ? (
             <TrackPlayer playTrack={playTrack} setPlayTrack={setPlayTrack} />
           ) : (
             ""
           )}
-          <FadeBackgroundImage imageUrl={trackToPlay?.imageUrl} />
+          <FadeBackgroundImage imageUrl={getTrackFromUrl?.imageUrl} />
           {/* Content */}
           <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9">
             <div className="flex w-full flex-col items-center justify-start gap-6 lg:flex-row lg:items-end">
               <img
                 className="h-52 w-52 lg:h-64 lg:w-64 "
-                src={trackToPlay?.imageUrl}
+                src={getTrackFromUrl?.imageUrl}
                 alt=""
               />
               <div className="order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start">
                 <p className="text-3xl font-bold lg:text-5xl">
-                  {trackToPlay?.musicName}
+                  {getTrackFromUrl?.musicName}
                 </p>
-                <p className="lg:text-2xl">{trackToPlay?.singer}</p>
+                <p className="lg:text-2xl">{getTrackFromUrl?.singer}</p>
                 <p className="">156.6k plays / 683 likes </p>
               </div>
             </div>
@@ -69,38 +70,33 @@ type TrackPlayerProps = {
   playTrack: boolean;
   setPlayTrack: (value: boolean) => void;
 };
-interface Track {
-  musicName: string;
-  singer: string;
-  imageUrl: string;
-  url: string;
-  genre?: string;
-  state?: string;
-}
+
 const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
   const location = useLocation();
   const { track } = useParams();
   const [show, setShow] = useState(false);
   const [song, setSong] = useState(new Audio(location.state.url));
-  const [allTracks, setAllTracks] = useState<Track[]>([]);
+  const [allTracks, setAllTracks] = useState<ITrack[]>([]);
   const params = useParams();
-
+  const tracks = useSelector((state: RootState) => state.tracks.tracks);
+  const playlists = useSelector(
+    (state: RootState) => state.playlists.playlists,
+  );
   useEffect(() => {
     setTimeout(() => setShow(true), 200);
     if (params.playlist) {
-      const playlistTracks = playLists.find((p) => p.title === params.playlist);
-      setAllTracks(playlistTracks?.tracks ? playlistTracks.tracks : []);
+      const currentPlaylist = playlists.find((p) => p.id === params.playlist);
+      setAllTracks(currentPlaylist ? currentPlaylist.tracks : []);
     } else {
-      const localTracks = tracks;
-      setAllTracks(localTracks);
+      setAllTracks(tracks);
     }
   }, []);
   useEffect(() => {
-    setSong(new Audio(location.state.url))
-  },[location])
+    setSong(new Audio(location.state.url));
+  }, [location]);
 
+  const trackToPlay = tracks.find((t) => t.id === track);
 
-  const trackToPlay = tracks.find((t) => t.musicName === track);
   return (
     <div
       className={`absolute ${
@@ -131,10 +127,7 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
             alt=""
           />
         </div>
-        <MusicPlayerControllers
-          allTracks={allTracks}
-          song={song}
-        />
+        <MusicPlayerControllers allTracks={allTracks} song={song} />
       </div>
       <MoreMusics allTracks={allTracks} />
     </div>

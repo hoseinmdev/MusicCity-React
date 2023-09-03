@@ -1,26 +1,22 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
-import PlayedTrack from "@/utils/trackToPlay";
+import PlayedTrack from "@/utils/getTrackFromUrl";
 import { TRACK_PAGE } from "@/pathes";
-type TrackLineProps = {
-  musicName: string;
-  singer: string;
-  imageUrl: string | undefined;
-  url: string;
-};
+import { ITrack } from "@/redux/Tracks/TracksSlice";
 
-const TrackLine: React.FC<TrackLineProps> = ({
+const TrackLine: React.FC<ITrack> = ({
   musicName,
   singer,
   imageUrl,
   url,
+  id,
 }) => {
   const { playlist } = useParams();
   const playingTrack = PlayedTrack();
   return (
     <Link
-      to={`/${TRACK_PAGE}/${musicName}${playlist ? "/" + playlist : ""}`}
+      to={`/${TRACK_PAGE}/${id}${playlist ? "/" + playlist : ""}`}
       state={{ url }}
       className={`flex min-h-[4rem] w-full items-center justify-between overflow-hidden rounded-md bg-gray-200/10 hover:bg-gray-200/50 lg:cursor-pointer ${
         playingTrack?.musicName === musicName ? "bg-gray-200/50" : ""

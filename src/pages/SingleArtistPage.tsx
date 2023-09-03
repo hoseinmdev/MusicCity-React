@@ -1,14 +1,22 @@
 import { TrackLine } from "@/components/common";
-import { allArtists } from "@/db/artists";
-import { tracks } from "@/db/tracks";
 import SiteLayout from "@/layout/SiteLayout";
-import React from "react";
+import { getArtists } from "@/redux/Artists/ArtistsSlice";
+import { getTracks } from "@/redux/Tracks/TracksSlice";
+import { AppDispatch, RootState } from "@/store";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const SingleArtistPage: React.FC = () => {
   const { artist } = useParams();
-  const currentArtist = allArtists.find((a) => a.name === artist);
-
+  const dispatch = useDispatch<AppDispatch>();
+  const allArtists = useSelector((state: RootState) => state.artists.artists);
+  const tracks = useSelector((state: RootState) => state.tracks.tracks);
+  const currentArtist = allArtists.find((a) => a.id === artist);
+  useEffect(() => {
+    dispatch(getArtists());
+    dispatch(getTracks());
+  }, []);
   return (
     <SiteLayout>
       <div className="flex h-full w-full  flex-col items-center justify-start gap-2 pb-24 lg:p-4">
@@ -38,15 +46,7 @@ const SingleArtistPage: React.FC = () => {
           <div className="flex h-full w-full flex-col items-center justify-start gap-3">
             {tracks.map((track) => {
               if (track.singer === currentArtist?.name) {
-                return (
-                  <TrackLine
-                    url={track.url}
-                    imageUrl={track.imageUrl}
-                    musicName={track.musicName}
-                    singer={track.singer}
-                    key={track.imageUrl}
-                  />
-                );
+                return <TrackLine {...track} />;
               }
             })}
           </div>

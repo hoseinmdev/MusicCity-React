@@ -4,17 +4,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { ArtistAvatar } from "../common";
 import { useMediaPredicate } from "react-media-hook";
-
-interface Artist {
-  name: string;
-  followers: number;
-  imageUrl: string;
-  genre: string;
-}
-type ArtistsList = Artist[];
+import { IArtist } from "@/redux/Artists/ArtistsSlice";
 
 const ArtistsList: React.FC<{
-  artists: ArtistsList;
+  artists: IArtist[];
   title: string;
   type: string;
 }> = ({ artists, title, type }) => {
@@ -32,12 +25,8 @@ const ArtistsList: React.FC<{
           {artists.map((artist) => {
             if (artist.genre === type) {
               return (
-                <SwiperSlide key={artist.name}>
-                  <ArtistAvatar
-                    title={artist.name}
-                    followers={artist.followers}
-                    imageUrl={artist.imageUrl}
-                  />
+                <SwiperSlide key={artist.id}>
+                  <ArtistAvatar {...artist} />  
                 </SwiperSlide>
               );
             }

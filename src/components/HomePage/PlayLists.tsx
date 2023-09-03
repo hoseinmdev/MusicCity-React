@@ -1,20 +1,13 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { PlaylistBox } from "../common";
 import { useMediaPredicate } from "react-media-hook";
+import { IPlaylist } from "@/redux/Playlists/PlaylistsSlice";
 
-interface PlayList {
-  title: string;
-  followers: number;
-  imageUrl: string;
-}
-type PlayLists = PlayList[];
-
-const PlayLists: React.FC<{ playLists: PlayLists; playListsTitle: string }> = ({
-  playListsTitle,
-  playLists,
-}) => {
+const PlayLists: React.FC<{
+  playLists: IPlaylist[];
+  playListsTitle: string;
+}> = ({ playListsTitle, playLists }) => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   return (
@@ -31,11 +24,7 @@ const PlayLists: React.FC<{ playLists: PlayLists; playListsTitle: string }> = ({
           {playLists.map((playList) => {
             return (
               <SwiperSlide key={playList.title}>
-                <PlaylistBox
-                  title={playList.title}
-                  followers={playList.followers}
-                  imageUrl={playList.imageUrl}
-                />
+                <PlaylistBox {...playList} />
               </SwiperSlide>
             );
           })}

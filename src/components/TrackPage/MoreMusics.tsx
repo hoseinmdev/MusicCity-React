@@ -1,48 +1,27 @@
 import React from "react";
 import { TrackBox, TrackLine } from "../common";
 import { Swiper, SwiperSlide } from "swiper/react";
-// Import Swiper styles
 import "swiper/css";
 import { useMediaPredicate } from "react-media-hook";
+import { ITrack } from "@/redux/Tracks/TracksSlice";
 
-interface Track {
-  musicName: string;
-  singer: string;
-  imageUrl: string;
-  url: string;
-  genre?: string;
-  state?: string;
-}
 
-const MoreMusics: React.FC<{ allTracks: Track[] }> = ({ allTracks }) => {
+const MoreMusics: React.FC<{ allTracks: ITrack[] }> = ({ allTracks }) => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   const renderMoreTracks = () => {
-    return allTracks.slice(0,15).map((track) => {
-      return (
-        <TrackLine
-          url={track.url}
-          key={track.imageUrl}
-          imageUrl={track.imageUrl}
-          singer={track.singer}
-          musicName={track.musicName}
-        />
-      );
+    return allTracks.slice(0, 15).map((track) => {
+      return <TrackLine {...track} />;
     });
   };
   const renderMobileMoreTracks = () => {
     return (
       <Swiper className="h-auto w-full" spaceBetween={10} slidesPerView={2.2}>
         <div className="flex w-full justify-between gap-4">
-          {allTracks.slice(0,15).map((track) => {
+          {allTracks.slice(0, 15).map((track) => {
             return (
               <SwiperSlide key={track.musicName}>
-                <TrackBox
-                  singer={track.singer}
-                  url={track.url}
-                  musicName={track.musicName}
-                  imageUrl={track.imageUrl}
-                />
+                <TrackBox {...track} />
               </SwiperSlide>
             );
           })}

@@ -3,6 +3,7 @@ import { TrackLine } from "@/components/common";
 import Skeleton from "@/components/common/Skeleton";
 import { genres, moods } from "@/db/genreMoods";
 import SiteLayout from "@/layout/SiteLayout";
+import { ITrack } from "@/redux/Tracks/TracksSlice";
 import { RootState } from "@/store";
 import React, { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
@@ -11,13 +12,7 @@ import { useSelector } from "react-redux";
 const SearchPage: React.FC = () => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState("");
-  interface Track {
-    musicName: string;
-    singer: string;
-    imageUrl: string;
-    url: string;
-  }
-  const [foundTracks, setFoundTracks] = useState<Track[]>();
+  const [foundTracks, setFoundTracks] = useState<ITrack[]>();
   const tracks = useSelector((state: RootState) => state.tracks.tracks);
 
   useEffect(() => {
@@ -61,15 +56,7 @@ const SearchPage: React.FC = () => {
           {value ? (
             <div className="flex w-full flex-col items-center justify-center gap-5">
               {foundTracks?.map((track) => {
-                return (
-                  <TrackLine
-                    url={track.url}
-                    imageUrl={track.imageUrl}
-                    musicName={track.musicName}
-                    singer={track.singer}
-                    key={track.imageUrl}
-                  />
-                );
+                return <TrackLine {...track} />;
               })}
             </div>
           ) : (

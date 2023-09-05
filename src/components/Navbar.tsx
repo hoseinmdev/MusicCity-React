@@ -31,7 +31,7 @@ const allRoutes = [
 
 const Navbar: FC = () => {
   return (
-    <div className="fixed bottom-0 z-[1000] flex w-full flex-row justify-between bg-neutral-800 lg:relative lg:h-screen lg:w-2/12 lg:flex-col">
+    <div className="fixed bottom-0 z-[1000] flex w-full flex-row justify-between bg-zinc-800 dark:bg-neutral-800 lg:relative lg:h-screen lg:w-2/12 lg:flex-col">
       <div className="hidden scale-90 justify-center pt-4 lg:flex">
         <SiteLogo />
       </div>

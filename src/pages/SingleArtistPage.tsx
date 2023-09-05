@@ -19,7 +19,7 @@ const SingleArtistPage: React.FC = () => {
   }, []);
   return (
     <SiteLayout>
-      <div className="flex h-full w-full  flex-col items-center justify-start gap-2 pb-24 lg:p-4">
+      <div className="flex h-full w-full  flex-col items-center justify-start gap-2 pb-24">
         <div className="relative flex h-full w-full flex-col items-center justify-end gap-3 lg:flex-row lg:items-center lg:justify-start lg:gap-8">
           {/* Background image */}
           <div
@@ -30,19 +30,19 @@ const SingleArtistPage: React.FC = () => {
           ></div>
           <img
             src={currentArtist?.imageUrl}
-            className="z-40 hidden w-96 rounded-full lg:block"
+            className="z-40 hidden w-96 rounded-full lg:block lg:p-4"
           />
-          <p className="z-40 text-center text-3xl lg:text-start lg:text-4xl lg:opacity-70">
+          <p className="z-40 text-center text-3xl text-white lg:text-start lg:text-4xl dark:lg:opacity-70">
             {currentArtist?.name}
           </p>
-          <div className="z-40 flex w-full items-center justify-evenly pb-8 text-sm lg:h-1/6 lg:w-auto lg:justify-start lg:gap-4 lg:border-l lg:border-l-white lg:pb-0 lg:pl-5 lg:text-lg">
+          <div className="z-40 flex  w-full items-center justify-evenly pb-8 text-sm text-white lg:h-1/6 lg:w-auto lg:justify-start lg:gap-4 lg:border-l lg:border-l-white lg:pb-0 lg:pl-5 lg:text-lg">
             <p>{currentArtist?.followers}</p>
             <p>65m plays</p>
             <p>166.3 likes</p>
           </div>
         </div>
-        <div className="flex h-3/4 max-h-full w-full flex-col items-start justify-start gap-4 overflow-auto p-2  lg:h-full lg:max-h-none">
-          <p className="opacity-70">Songs ...</p>
+        <div className="flex h-3/4 max-h-full w-full flex-col items-start justify-start gap-4 overflow-auto p-2  lg:h-full lg:max-h-none lg:p-4">
+          <p className="dark:text-white dark:opacity-70">Songs ...</p>
           <div className="flex h-full w-full flex-col items-center justify-start gap-3">
             {tracks.map((track) => {
               if (track.singer === currentArtist?.name) {

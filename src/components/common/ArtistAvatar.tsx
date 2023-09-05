@@ -10,7 +10,7 @@ const ArtistAvatar: React.FC<IArtist> = ({ followers, id, imageUrl, name }) => {
   return (
     <Link
       to={`/${SINGLE_ARTIST_PAGE}/${id}`}
-      className="flex  flex-col items-center justify-between gap-2 text-sm text-white  lg:text-base"
+      className="flex  flex-col items-center justify-between gap-2 text-sm text-gray-800 dark:text-white  lg:text-base"
     >
       <img
         className="h-full w-full rounded-full hover:opacity-70"
@@ -27,7 +27,7 @@ const ArtistAvatar: React.FC<IArtist> = ({ followers, id, imageUrl, name }) => {
         </p>
       )}
 
-      <p className="text-xs opacity-60">{followers}k followers</p>
+      <p className="text-xs dark:opacity-60">{followers}k followers</p>
     </Link>
   );
 };

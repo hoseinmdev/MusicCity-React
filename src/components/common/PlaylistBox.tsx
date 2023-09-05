@@ -13,11 +13,11 @@ const PlaylistBox: React.FC<IPlaylist> = ({
   return (
     <Link
       to={`/${PLAYLIST_PAGE}/${id}`}
-      className="flex flex-col items-center justify-between gap-2 text-base text-white hover:opacity-70 lg:lg:cursor-pointer "
+      className="flex flex-col items-center justify-between gap-2 text-base hover:brightness-75 dark:text-white dark:hover:opacity-70 lg:lg:cursor-pointer "
     >
       <img className="rounded-xl" src={imageUrl} alt="" />
       <p className="text-sm lg:text-base">{title}</p>
-      <p className="opacity-60">followers: {followers + "k"}</p>
+      <p className="text-sm lg:text-base dark:opacity-60">followers: {followers + "k"}</p>
     </Link>
   );
 };

@@ -18,7 +18,7 @@ const TrackLine: React.FC<ITrack> = ({
     <Link
       to={`/${TRACK_PAGE}/${id}${playlist ? "/" + playlist : ""}`}
       state={{ url }}
-      className={`flex min-h-[4rem] w-full items-center justify-between overflow-hidden rounded-md bg-gray-200/10 hover:bg-gray-200/50 lg:cursor-pointer ${
+      className={`flex min-h-[4rem] w-full items-center justify-between dark:text-white overflow-hidden rounded-md bg-neutral-300 dark:bg-gray-200/10 hover:bg-gray-400/20 dark:hover:bg-gray-200/50 lg:cursor-pointer ${
         playingTrack?.musicName === musicName ? "bg-gray-200/50" : ""
       }`}
     >
@@ -29,7 +29,7 @@ const TrackLine: React.FC<ITrack> = ({
         </div>
         <div className="flex w-full items-center justify-between pr-2 lg:gap-20 lg:pr-10">
           <p>{musicName}</p>
-          <p className="opacity-60">{singer}</p>
+          <p className="dark:opacity-60">{singer}</p>
         </div>
       </div>
     </Link>

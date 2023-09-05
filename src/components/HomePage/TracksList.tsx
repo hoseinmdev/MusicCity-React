@@ -14,7 +14,7 @@ const TracksList: React.FC<{
 
   return (
     <div className="flex  w-full flex-col items-start gap-2">
-      <p className="text-lg italic opacity-70 lg:text-2xl">• {title}</p>
+      <p className="text-lg italic dark:text-white dark:opacity-70 lg:text-2xl">• {title}</p>
       <Swiper
         className="h-auto w-full"
         spaceBetween={isMobile ? 10 : 30}

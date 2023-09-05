@@ -10,6 +10,8 @@ import "swiper/css";
 import { useMediaPredicate } from "react-media-hook";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import siteLogoDark from "@/assets/siteLogoDark.png";
+import ThemeChangerButton from "./ThemeChangerButton";
 const allSlides = [
   {
     id: "947c1e721451e0f49d796d06aca267da",
@@ -48,15 +50,19 @@ const Slider: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="flex w-full items-center justify-start pl-4 lg:hidden">
-        <SiteLogo />
+      <div className="flex w-full items-center justify-between pl-4 lg:hidden">
+        <div className="hidden dark:flex dark:justify-center">
+          <SiteLogo />
+        </div>
+        <img className="w-36 dark:hidden lg:hidden" src={siteLogoDark} />
+        <ThemeChangerButton />
       </div>
       <Swiper spaceBetween={20} slidesPerView={isMobile ? 1 : 3.85}>
         {allSlides.map((slide) => {
           return (
             <SwiperSlide
               key={slide.singer}
-              className="group/trackBox relative  h-60 !w-[100%] !scale-[0.86] text-white lg:h-72 lg:!w-[25%]  lg:!scale-100"
+              className="group/trackBox relative  h-60 !w-[100%] !scale-[0.86] dark:text-white lg:h-72 lg:!w-[25%]  lg:!scale-100"
             >
               <Link
                 className="flex flex-col items-start justify-center gap-2"
@@ -68,8 +74,8 @@ const Slider: React.FC = () => {
                   alt=""
                 />
                 <p className="">{slide.musicName}</p>
-                <p className="opacity-60">{slide.singer}</p>
-                <button className="absolute  bottom-5 right-2 text-6xl opacity-0 hover:scale-110 group-hover/trackBox:bottom-24 group-hover/trackBox:opacity-100">
+                <p className="dark:opacity-60">{slide.singer}</p>
+                <button className="absolute bottom-5 right-2 text-6xl text-white opacity-0 hover:scale-110 group-hover/trackBox:bottom-24 group-hover/trackBox:opacity-100 dark:text-gray-800">
                   <AiFillPlayCircle />
                 </button>
               </Link>

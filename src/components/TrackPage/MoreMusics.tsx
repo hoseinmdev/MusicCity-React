@@ -16,7 +16,7 @@ const MoreMusics: React.FC<{ allTracks: ITrack[] }> = ({ allTracks }) => {
   };
   const renderMobileMoreTracks = () => {
     return (
-      <Swiper className="h-auto w-full" spaceBetween={10} slidesPerView={2.2}>
+      <Swiper className="h-auto w-full rounded-xl" spaceBetween={10} slidesPerView={2.2}>
         <div className="flex w-full justify-between gap-4">
           {allTracks.slice(0, 15).map((track) => {
             return (
@@ -36,7 +36,7 @@ const MoreMusics: React.FC<{ allTracks: ITrack[] }> = ({ allTracks }) => {
         {renderMoreTracks()}
       </div>
       <div className="z-40 h-72 w-full rounded-xl pb-[20rem] lg:hidden">
-        <p className="pb-2 opacity-70">More Musics...</p>
+        <p className="pb-2 text-white dark:text-gray-800 dark:opacity-70">More Musics...</p>
         {isMobile ? renderMobileMoreTracks() : ""}
       </div>
     </>

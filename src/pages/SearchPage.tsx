@@ -31,8 +31,8 @@ const SearchPage: React.FC = () => {
     <SiteLayout>
       {show ? (
         <div className="flex w-full flex-col items-start justify-start gap-16 p-4 pb-28">
-          <div className="flex w-full items-center justify-start overflow-hidden rounded-3xl bg-neutral-700 lg:w-96">
-            <div className="pl-4 text-xl">
+          <div className="flex w-full items-center justify-start overflow-hidden rounded-3xl border-2 border-neutral-400 bg-neutral-300  dark:border-none dark:bg-neutral-700 lg:w-96">
+            <div className="animate-bounce pl-4 text-xl">
               <AiOutlineSearch />
             </div>
             <input

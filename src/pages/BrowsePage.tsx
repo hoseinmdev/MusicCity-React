@@ -17,7 +17,7 @@ const BrowsePage: React.FC = () => {
     <SiteLayout>
       {!loading ? (
         <div className=" flex w-full flex-col items-start justify-start gap-5 p-4 pb-24 pt-14">
-          <p className="fixed left-0 top-0 z-30 flex w-full items-center justify-center rounded-b-2xl bg-neutral-800 p-2 text-lg lg:relative lg:justify-start lg:bg-transparent">
+          <p className="fixed left-0 top-0 z-30 flex w-full items-center justify-center rounded-b-2xl bg-zinc-300 text-gray-800 dark:text-white dark:bg-neutral-800 p-2 text-lg lg:relative lg:justify-start lg:bg-transparent">
             Songs for you :)
           </p>
           {tracks.map((track) => {

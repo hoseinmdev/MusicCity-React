@@ -1,27 +1,25 @@
-# React + TypeScript + Vite
+ 👋🏻 Hi, this is Hot Music Site 🎧🔥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+***😵‍💫 With amazing feauters***
 
-Currently, two official plugins are available:
+1 - Full Responsive 💥<br />
+2- Have DarkMode & LightMode 🌓<br />
+3 - A lot of Musics (Pop , Rap , ...) 🎵<br />
+4 - A lot of Artists in artists page (Pop , Rap , ...) 👤<br />
+4 - Every Artist have a single page 🎩<br />
+5 - You can search your music 🔍<br />
+6 - You can download music from site 💛<br />
+7 - We have playlists of every genre 👑<br />
+8 - Every musics have a beautifull single page 🖼<br />
+9 - You Can Listen to your favorite playlist or music 👌🏻<br />
+10 - And ...
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+### You can visit **Music-City** online in : [LiveDemo](https://hosein-music-city.netlify.app/)<br />
+### ***Enjoy it 😉***
+<br />
+<br />
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=27&duration=2000&pause=1000&color=ACACAC&repeat=false&width=468&height=41&lines=%F0%9F%92%8EWatch+my+another+projects)](https://git.io/typing-svg)
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+You can visit Digi-Hosein online in : [LiveDemo](https://hoseinshopcartreact.netlify.app)<br />

@@ -15,7 +15,7 @@ const ArtistsList: React.FC<{
 
   return (
     <div className="flex  w-full flex-col items-start gap-2">
-      <p className="text-lg italic dark:opacity-70 lg:text-2xl">• {title}</p>
+      <p className="text-lg italic dark:opacity-70 lg:text-2xl dark:text-white">• {title}</p>
       <Swiper
         className="w-full"
         spaceBetween={isMobile ? 10 : 30}

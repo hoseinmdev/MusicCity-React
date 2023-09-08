@@ -24,7 +24,7 @@ const PlaylistPage: React.FC = () => {
   return (
     <SiteLayout>
       {!loading ? (
-        <div className="relative flex h-full w-full flex-col">
+        <div className="relative flex h-full w-full flex-col dark:text-white">
           <FadeBackgroundImage imageUrl={currentPlaylist?.imageUrl} />
           {/* Content */}
           <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9">

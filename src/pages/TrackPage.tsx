@@ -34,7 +34,7 @@ const TrackPage: React.FC = () => {
           )}
           <FadeBackgroundImage imageUrl={getTrackFromUrl?.imageUrl} />
           {/* Content */}
-          <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9 dark:text-gray-800 text-white">
+          <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9 dark:text-white text-white">
             <div className="flex w-full flex-col items-center justify-start gap-6 lg:flex-row lg:items-end">
               <img
                 className="h-52 w-52 lg:h-64 lg:w-64 "

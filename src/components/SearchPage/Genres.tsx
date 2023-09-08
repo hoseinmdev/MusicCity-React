@@ -24,7 +24,7 @@ const Genres: React.FC<{ genres: Genres; title: string }> = ({
               className="relative lg:cursor-pointer"
             >
               <img className="w-full rounded-lg lg:w-52" src={genre.imageUrl} />
-              <p className="absolute bottom-1 left-3 text-base lg:text-lg text-white dark:text-gray-800">
+              <p className="absolute bottom-1 left-3 text-base lg:text-lg text-white">
                 {genre.title}
               </p>
             </Link>

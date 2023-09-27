@@ -30,7 +30,7 @@ const TrackBox: React.FC<ITrack> = ({
       <p className="">{musicName}</p>
       <p className="dark:opacity-60">{singer}</p>
       <button
-        className={`absolute text-white dark:text-gray-800 bottom-[-5px] right-1 hidden text-6xl opacity-0 hover:scale-105 group-hover/trackBox:opacity-100 lg:block lg:group-hover/trackBox:bottom-[4.25rem] ${
+        className={`absolute text-white  bottom-[-5px] right-1 hidden text-6xl opacity-0 hover:scale-105 group-hover/trackBox:opacity-100 lg:block lg:group-hover/trackBox:bottom-[4.25rem] ${
           playingTrack?.musicName === musicName
             ? "bottom-[5.5rem] right-9 !block animate-pulse text-2xl opacity-100"
             : ""

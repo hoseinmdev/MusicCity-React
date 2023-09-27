@@ -117,7 +117,7 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
               song.load();
               setTimeout(() => setPlayTrack(false), 300);
             }}
-            className="flex w-full items-center justify-between text-3xl lg:cursor-pointer dark:text-gray-800 text-white"
+            className="flex w-full items-center justify-between text-3xl lg:cursor-pointer  text-white"
           >
             <AiOutlineClose />
           </div>

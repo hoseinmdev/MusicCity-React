@@ -75,7 +75,7 @@ const Slider: React.FC = () => {
                 />
                 <p className="">{slide.musicName}</p>
                 <p className="dark:opacity-60">{slide.singer}</p>
-                <button className="absolute bottom-5 right-2 text-6xl text-white opacity-0 hover:scale-110 group-hover/trackBox:bottom-24 group-hover/trackBox:opacity-100 dark:text-gray-800">
+                <button className="absolute bottom-5 right-2 text-6xl text-white opacity-0 hover:scale-110 group-hover/trackBox:bottom-24 group-hover/trackBox:opacity-100 ">
                   <AiFillPlayCircle />
                 </button>
               </Link>

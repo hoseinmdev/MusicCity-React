@@ -2,9 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
+
 const manifestForPlugIn: Partial<VitePWAOptions> = {
   registerType: "prompt",
-  // includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
+  includeAssets : ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
   manifest: {
     name: "React-vite-app",
     short_name: "react-vite-app",
@@ -45,6 +46,5 @@ const manifestForPlugIn: Partial<VitePWAOptions> = {
 };
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:"./",
   plugins: [react(), tsconfigPaths(), VitePWA(manifestForPlugIn)],
 });

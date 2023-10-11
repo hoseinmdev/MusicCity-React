@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
-const manifestForPlugIn:Partial<VitePWAOptions> = {
+const manifestForPlugIn: Partial<VitePWAOptions> = {
   registerType: "prompt",
   // includeAssests: ["favicon.ico", "apple-touc-icon.png", "masked-icon.svg"],
   manifest: {
@@ -11,25 +11,25 @@ const manifestForPlugIn:Partial<VitePWAOptions> = {
     description: "I am a simple vite app",
     icons: [
       {
-        src: "/android-chrome-192x192.png",
+        src: "/public/musicCityLogo.png",
         sizes: "192x192",
         type: "image/png",
         purpose: "favicon",
       },
       {
-        src: "/android-chrome-512x512.png",
+        src: "/public/musicCityLogo.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "favicon",
       },
       {
-        src: "/apple-touch-icon.png",
+        src: "/public/musicCityLogo.png",
         sizes: "180x180",
         type: "image/png",
         purpose: "apple touch icon",
       },
       {
-        src: "/maskable_icon.png",
+        src: "/public/musicCityLogo.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "any maskable",

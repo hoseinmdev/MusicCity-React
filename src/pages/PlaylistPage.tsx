@@ -9,6 +9,7 @@ import { TrackLine } from "@/components/common";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/store";
 import { getPlaylists } from "@/redux/Playlists/PlaylistsSlice";
+import NostalogiaImage from "@/assets/Playlists/Nostalgia.jpg";
 
 const PlaylistPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,13 +26,23 @@ const PlaylistPage: React.FC = () => {
     <SiteLayout>
       {!loading ? (
         <div className="relative flex h-full w-full flex-col dark:text-white">
-          <FadeBackgroundImage imageUrl={currentPlaylist?.imageUrl} />
+          <FadeBackgroundImage
+            imageUrl={
+              currentPlaylist?.imageUrl.length !== 0
+                ? currentPlaylist?.imageUrl
+                : NostalogiaImage
+            }
+          />
           {/* Content */}
           <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9">
             <div className="flex w-full flex-col items-center justify-start gap-6 lg:flex-row lg:items-end">
               <img
                 className="h-52 w-52 lg:h-64 lg:w-64 "
-                src={currentPlaylist?.imageUrl}
+                src={
+                  currentPlaylist?.imageUrl.length !== 0
+                    ? currentPlaylist?.imageUrl
+                    : NostalogiaImage
+                }
                 alt=""
               />
               <div className="order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start">

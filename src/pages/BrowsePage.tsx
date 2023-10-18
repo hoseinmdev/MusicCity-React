@@ -14,7 +14,6 @@ const BrowsePage: React.FC = () => {
   const { tracks, loading } = useSelector((state: RootState) => state.tracks);
   const [items, setItems] = useState<ITrack[]>([]);
   const [hasMore] = useState(true);
-  const [page, setPage] = useState(1);
   useEffect(() => {
     dispatch(getTracks());
   }, []);
@@ -22,15 +21,11 @@ const BrowsePage: React.FC = () => {
     setItems(tracks.slice(0, 15));
   }, [tracks]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setItems(tracks.slice(0, page * 10));
-    }, 1000);
-  }, [page]);
-
 
   const fetchMoreData = () => {
-    setPage(page + 1);
+    setTimeout(() => {
+      setItems([...items, ...tracks.slice(items.length, items.length + 10)]);
+    }, 1000);
   };
   return (
     <SiteLayout>

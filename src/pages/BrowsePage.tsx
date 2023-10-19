@@ -13,7 +13,7 @@ const BrowsePage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { tracks, loading } = useSelector((state: RootState) => state.tracks);
   const [items, setItems] = useState<ITrack[]>([]);
-  const [hasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     dispatch(getTracks());
   }, []);
@@ -21,11 +21,14 @@ const BrowsePage: React.FC = () => {
     setItems(tracks.slice(0, 15));
   }, [tracks]);
 
-
   const fetchMoreData = () => {
-    setTimeout(() => {
-      setItems([...items, ...tracks.slice(items.length, items.length + 10)]);
-    }, 1000);
+    if (items.length >= tracks.length) {
+      setHasMore(false);
+    } else {
+      setTimeout(() => {
+        setItems([...items, ...tracks.slice(items.length, items.length + 10)]);
+      }, 1000);
+    }
   };
   return (
     <SiteLayout>

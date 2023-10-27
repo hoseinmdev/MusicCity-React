@@ -45,7 +45,7 @@ const PlaylistPage: React.FC = () => {
                 }
                 alt=""
               />
-              <div className="order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start">
+              <div className="order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start text-white">
                 <p className="text-3xl font-bold lg:text-5xl">
                   {currentPlaylist?.title}
                 </p>

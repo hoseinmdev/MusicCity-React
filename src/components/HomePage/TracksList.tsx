@@ -16,7 +16,7 @@ const TracksList: React.FC<{
     <div className="flex  w-full flex-col items-start gap-2">
       <p className="text-lg italic dark:text-white dark:opacity-70 lg:text-2xl">• {title}</p>
       <Swiper
-        className="h-auto w-full"
+        className="h-auto w-[100%]"
         spaceBetween={isMobile ? 10 : 30}
         slidesPerView={isMobile ? 2.5 : 8}
       >

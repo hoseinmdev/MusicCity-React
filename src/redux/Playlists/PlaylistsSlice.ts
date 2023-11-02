@@ -7,7 +7,7 @@ export interface IPlaylist {
   title: string;
   followers: number;
   imageUrl: string;
-  tracks:ITrack[]
+  tracks?:ITrack[]
 }
 export interface PlaylistsState {
   playlists: IPlaylist[];

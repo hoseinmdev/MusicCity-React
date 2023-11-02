@@ -21,10 +21,7 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     dispatch(getTracks());
     dispatch(getPlaylists());
-    // toast("🍕 Welcome To Music City :)", {
-    //   autoClose: 2000,
-    //   theme: "dark",
-    // });
+    
   }, []);
 
   const renderHomePage = () => {

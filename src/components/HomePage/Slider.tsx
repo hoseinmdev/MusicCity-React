@@ -12,27 +12,32 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import siteLogoDark from "@/assets/siteLogoDark.png";
 import ThemeChangerButton from "./ThemeChangerButton";
+import { TRACK_PAGE } from "@/pathes";
 const allSlides = [
   {
     id: "947c1e721451e0f49d796d06aca267da",
+    url: "https://cdnmrtehran.ir/media/mp3s/01/bda3567587_02bb288c1f31f80a848f0bcf4bb76be7.mp3",
     singer: "Amin Rostami",
     musicName: "Ba Mani",
     imageUrl: aminRostami,
   },
   {
     id: "2c28e2d39734d32f2d54b91fc5aaa94d",
+    url: "https://cdnmrtehran.ir/media/mp3s/01/761fdd66bb_a454decb7354aa1d2e3d8d0898f80cb5.mp3",
     singer: "Masoud Sadeghloo",
     musicName: "Mesle Gol",
     imageUrl: MesleGol,
   },
   {
     id: "f4eb21f74bfd48398c95f45fc9cbe7a8",
+    url: "https://cdnmrtehran.ir/media/mp3s/01/cc2a5f958a_827a2bbb5c93a692281e8ad62096714a.mp3",
     singer: "Naser Zeynali",
     musicName: "Almas",
     imageUrl: naserZeynali,
   },
   {
     id: "29ebd755dfcbbd87ead7dbeaf9815882",
+    url: "https://cdnmrtehran.ir/media/mp3s/01/ecf9d637eb_7af200fbb242af83fbdac72f63b01e00.mp3",
     singer: "Mohsen Yeganeh",
     musicName: "Dele Tanha",
     imageUrl: mohsenYeganeh,
@@ -41,6 +46,7 @@ const allSlides = [
     id: "dcfbd53590b548d581ae2100016f5fa1",
     singer: "Arash & Masih",
     musicName: "Jaddeh",
+    url: "https://cdnmrtehran.ir/media/mp3s/01/4d15b91225_808912982603643fa171f5a6033f30ff.mp3",
     imageUrl: masihArash,
   },
 ];
@@ -66,7 +72,8 @@ const Slider: React.FC = () => {
             >
               <Link
                 className="flex flex-col items-start justify-center gap-2"
-                to={`/track/${slide.id}`}
+                to={`/${TRACK_PAGE}/${slide.id}`}
+                state={ slide.url }
               >
                 <img
                   className="rounded-xl  transition-opacity duration-300 hover:opacity-70"

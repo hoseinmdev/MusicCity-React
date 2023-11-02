@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import {
   AiFillFolderAdd,
   AiFillHeart,
@@ -263,7 +264,7 @@ const MusicPlayerControllers: React.FC<{
   //   else if (musicPlayerSetting.shuffle === "on") return <BiShuffle />;
   // };
   return (
-    <div className="flex h-full w-full flex-col justify-between gap-6 lg:justify-center lg:gap-12 lg:pt-0 text-white">
+    <div className="flex h-full w-full flex-col justify-between gap-6 text-white lg:justify-center lg:gap-12 lg:pt-0">
       <MusicName />
 
       {/* TIME LINE */}
@@ -304,6 +305,53 @@ const MusicPlayerControllers: React.FC<{
 const MusicName = () => {
   const [liked, setLiked] = useState(false);
   const trackToPlay = PlayedTrack();
+  useEffect(() => {
+    const favoriteMusics = localStorage.getItem(`favorite`) || "";
+    const isInFavorites = favoriteMusics
+      ? JSON.parse(favoriteMusics).find(
+          (track: ITrack) => track.id === trackToPlay?.id,
+        )
+      : "";
+    setLiked(isInFavorites ? true : false);
+  }, []);
+  const addToFavoritesHandler = () => {
+    const favoriteMusics = localStorage.getItem(`favorite`) || "";
+    const isInFavorites = favoriteMusics
+      ? JSON.parse(favoriteMusics).find(
+          (track: ITrack) => track.id === trackToPlay?.id,
+        )
+      : "";
+
+    if (!isInFavorites) {
+      localStorage.setItem(
+        "favorite",
+        JSON.stringify(
+          [favoriteMusics && JSON.parse(favoriteMusics), trackToPlay]
+            .flat(1)
+            .filter((e) => e !== ""),
+        ),
+      );
+      toast("Add to favorites playlist 🌟", {
+        autoClose: 2000,
+        position: "top-center",
+        theme: "dark",
+      });
+      isInFavorites(true);
+    } else {
+      const deleteFromFavorites = favoriteMusics
+        ? JSON.parse(favoriteMusics).filter(
+            (track: ITrack) => track.id !== trackToPlay?.id,
+          )
+        : "";
+        toast("Delete from favorites playlist 💔", {
+          autoClose: 2000,
+          position: "top-center",
+          theme: "dark",
+        });
+      localStorage.setItem("favorite", JSON.stringify(deleteFromFavorites));
+      isInFavorites(false);
+    }
+  };
   return (
     <div className="flex w-full items-center justify-between">
       <div className="flex flex-col items-center justify-center gap-2">
@@ -320,7 +368,7 @@ const MusicName = () => {
         className="flex flex-col items-center  justify-center gap-2 lg:cursor-pointer"
         onClick={() => setLiked(!liked)}
       >
-        <div className="text-2xl">
+        <div onClick={addToFavoritesHandler} className="text-2xl">
           {liked ? <AiFillHeart /> : <AiOutlineHeart />}
         </div>
         <p className="text-sm">21k</p>

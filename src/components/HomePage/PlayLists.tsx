@@ -19,7 +19,7 @@ const PlayLists: React.FC<{
             id="yourFavoritesMusics"
             imageUrl={FavoriteMusicsImage}
             title="Your Favorites"
-            // tracks={favoriteMusics}
+            tracks={JSON.parse(favoriteMusics)}
             key={"dasas"}
           />
         </SwiperSlide>

@@ -1,6 +1,6 @@
- 👋🏻 Hi, this is Hot Music Site 🎧🔥
+👋🏻 Hi, this is Hot Music Site 🎧🔥
 
-***😵‍💫 With amazing feauters***
+**_😵‍💫 With amazing feauters_**
 
 1 - Full Responsive 💥<br />
 2- Have DarkMode & LightMode 🌓<br />
@@ -12,11 +12,13 @@
 7 - We have playlists of every genre 👑<br />
 8 - Every musics have a beautifull single page 🖼<br />
 9 - You Can Listen to your favorite playlist or music 👌🏻<br />
-10 - And ...
-
+10 - You Can have a playlist of your favorite musics !<br />
+11 - And ...
 
 ### You can visit **Music-City** online in : [LiveDemo](https://hosein-music-city.netlify.app/)<br />
-### ***Enjoy it 😉***
+
+### **_Enjoy it 😉_**
+
 <br />
 <br />
 

@@ -32,6 +32,140 @@
   animation: fadeShow 0.5s;
 }
 
+@keyframes fadeShow4 {
+  from {
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.fadeShow4 {
+  animation: fadeShow4 0.5s;
+}
+@keyframes fadeShow1 {
+  0% {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.fadeShow1 {
+  animation: fadeShow1 0.8s;
+}
+@keyframes fadeShow2 {
+  0% {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.fadeShow2 {
+  animation: fadeShow2 1s;
+}
+
+@keyframes fadeShow3 {
+  0% {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+    60% {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.fadeShow3 {
+  animation: fadeShow3 1.7s;
+}
+
+@keyframes fadeShow5 {
+  0% {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+    80% {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.fadeShow5 {
+  animation: fadeShow5 2s;
+}
+
+@keyframes fadeShow4 {
+  0% {
+    transform: translateY(15rem);
+    opacity: 0;
+  }
+    70% {
+    transform: translateY(15rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.fadeShow4 {
+  animation: fadeShow4 1.4s;
+}
+
+/* @keyframes fadeShow2 {
+  1% {
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.fadeShow2 {
+  animation: fadeShow2 1s;
+} */
+
+/* @keyframes fadeShow3 {
+  1% {
+    transform: translateY(5rem);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(5rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.fadeShow3 {
+  animation: fadeShow3 1.8s;
+} */
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;

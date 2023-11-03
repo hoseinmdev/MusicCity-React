@@ -41,7 +41,7 @@ const PlayLists: React.FC<{
     // }
   };
   return (
-    <div className="flex w-full flex-col items-start gap-4">
+    <div className="flex w-full flex-col items-start gap-4 fadeShow2">
       <p className="text-lg italic dark:text-white dark:opacity-70 lg:text-2xl">
         • {playListsTitle}
       </p>

@@ -32,7 +32,7 @@ const MoreMusics: React.FC<{ allTracks: ITrack[] }> = ({ allTracks }) => {
 
   return (
     <>
-      <div className=" z-50 hidden max-h-full w-full scale-95 flex-col items-start justify-start gap-5 overflow-auto  rounded-md p-2 lg:flex">
+      <div className=" z-50 hidden max-h-full w-full flex-col items-start justify-start gap-5 overflow-auto  rounded-md p-2 lg:flex fadeShow3">
         {renderMoreTracks()}
       </div>
       <div className="z-40 h-72 w-full rounded-xl pb-[20rem] lg:hidden">

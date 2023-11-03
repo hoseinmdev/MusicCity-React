@@ -55,7 +55,7 @@ const Slider: React.FC = () => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center fadeShow">
       <div className="flex w-full items-center justify-between pl-4 lg:hidden">
         <div className="hidden dark:flex dark:justify-center">
           <SiteLogo />

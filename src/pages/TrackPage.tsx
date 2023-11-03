@@ -37,11 +37,11 @@ const TrackPage: React.FC = () => {
           <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9 dark:text-white text-white">
             <div className="flex w-full flex-col items-center justify-start gap-6 lg:flex-row lg:items-end">
               <img
-                className="h-52 w-52 lg:h-64 lg:w-64 "
+                className="h-52 w-52 lg:h-64 lg:w-64 fadeShow1"
                 src={getTrackFromUrl?.imageUrl}
                 alt=""
               />
-              <div className="order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start">
+              <div className="order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start fadeShow2">
                 <p className="text-3xl font-bold lg:text-5xl">
                   {getTrackFromUrl?.musicName}
                 </p>
@@ -49,7 +49,7 @@ const TrackPage: React.FC = () => {
                 <p className="">156.6k plays / 683 likes </p>
               </div>
             </div>
-            <div className="flex w-full items-center justify-around gap-14  lg:justify-start lg:gap-9">
+            <div className="flex w-full items-center justify-around gap-14  lg:justify-start lg:gap-9 fadeShow4">
               <button
                 onClick={() => setPlayTrack(!playTrack)}
                 className="order-none text-6xl lg:order-1"
@@ -122,7 +122,7 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
             <AiOutlineClose />
           </div>
           <img
-            className="w-3/4 rounded-2xl hover:animate-pulse lg:w-[80%] lg:cursor-pointer"
+            className="w-3/4 rounded-2xl lg:w-[80%] lg:cursor-pointer fadeShow1"
             src={trackToPlay?.imageUrl}
             alt=""
           />

@@ -42,11 +42,11 @@ const PlaylistPage: React.FC = () => {
           <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9">
             <div className="flex w-full flex-col items-center justify-start gap-6 lg:flex-row lg:items-end">
               <img
-                className="h-52 w-52 lg:h-64 lg:w-64 "
+                className="fadeShow1 h-52 w-52 lg:h-64 lg:w-64 "
                 src={renderPlaylistImage()}
                 alt=""
               />
-              <div className="order-1 flex flex-col items-center gap-3 text-white lg:order-none lg:items-start">
+              <div className="fadeShow2 lg:items-star2 order-1 flex flex-col items-center gap-3 text-white lg:order-none">
                 <p className="text-3xl font-bold lg:text-5xl">
                   {currentPlaylist?.title}
                 </p>
@@ -56,7 +56,7 @@ const PlaylistPage: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="z-40 flex h-3/4 max-h-full w-full flex-col items-start justify-start gap-4 overflow-auto p-4  lg:h-full lg:max-h-none">
+          <div className="fadeShow4 z-40 flex h-3/4 max-h-full w-full flex-col items-start justify-start gap-4 overflow-auto  p-4 lg:h-full lg:max-h-none">
             <p className="opacity-70">Songs ...</p>
             <div className="flex h-full w-full flex-col items-center justify-start gap-3">
               {currentPlaylist?.tracks

@@ -39,7 +39,7 @@ const BrowsePage: React.FC = () => {
           </p>
           <div className="w-full">
             <InfiniteScroll
-              className="hideScrollbar flex flex-col gap-4"
+              className="hideScrollbar flex flex-col gap-4 fadeShow"
               dataLength={items.length}
               next={fetchMoreData}
               loader={<TracksLoading />}

@@ -264,7 +264,7 @@ const MusicPlayerControllers: React.FC<{
   //   else if (musicPlayerSetting.shuffle === "on") return <BiShuffle />;
   // };
   return (
-    <div className="flex h-full w-full flex-col justify-between gap-6 text-white lg:justify-center lg:gap-12 lg:pt-0">
+    <div className="flex h-full w-full flex-col justify-between gap-6 text-white lg:justify-center lg:gap-12 lg:pt-0 fadeShow2">
       <MusicName />
 
       {/* TIME LINE */}

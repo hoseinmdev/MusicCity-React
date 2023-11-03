@@ -13,7 +13,7 @@ const TracksList: React.FC<{
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   return (
-    <div className="flex  w-full flex-col items-start gap-2">
+    <div className="flex  w-full flex-col items-start gap-2 fadeShow2">
       <p className="text-lg italic dark:text-white dark:opacity-70 lg:text-2xl">• {title}</p>
       <Swiper
         className="h-auto w-[100%]"

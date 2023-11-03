@@ -27,10 +27,22 @@ const ArtistsPage: React.FC = () => {
       return (
         <SiteLayout>
           <div className="flex w-full flex-col items-end gap-8 p-4 pb-20 lg:gap-10 lg:p-9">
-            <ArtistsList artists={artists} title="Populer Pop" type="pop" />
-            <ArtistsList artists={artists} title="Populer Rap" type="rap" />
-            <ArtistsList artists={artists} title="Nostalgic" type="nostalgic" />
-            <ArtistsList artists={artists} title="Sonnati" type="sonnati" />
+            <div className="fadeShow1 w-full">
+              <ArtistsList artists={artists} title="Populer Pop" type="pop" />
+            </div>
+            <div className="fadeShow2 w-full">
+              <ArtistsList artists={artists} title="Populer Rap" type="rap" />
+            </div>
+            <div className="fadeShow3 w-full">
+              <ArtistsList
+                artists={artists}
+                title="Nostalgic"
+                type="nostalgic"
+              />
+            </div>
+            <div className="fadeShow5 w-full">
+              <ArtistsList artists={artists} title="Sonnati" type="sonnati" />
+            </div>
             <ArtistsList artists={artists} title="New Pop" type="newPop" />
           </div>
         </SiteLayout>

@@ -9,7 +9,7 @@
 
 * {
   transition: 0.2s;
-  font-family: "VazirFont";
+  font-family: "VazirFont" !important;
 }
 .hideScrollbar {
   -ms-overflow-style: none; /* Internet Explorer 10+ */

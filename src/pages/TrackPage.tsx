@@ -34,22 +34,22 @@ const TrackPage: React.FC = () => {
           )}
           <FadeBackgroundImage imageUrl={getTrackFromUrl?.imageUrl} />
           {/* Content */}
-          <div className=" z-10 flex w-full flex-col gap-4 p-2 lg:p-9 dark:text-white text-white">
+          <div className=" z-10 flex w-full flex-col gap-4 p-2 text-white dark:text-white lg:p-9">
             <div className="flex w-full flex-col items-center justify-start gap-6 lg:flex-row lg:items-end">
               <img
-                className="h-52 w-52 lg:h-64 lg:w-64 fadeShow1"
+                className="fadeShow1 h-52 w-52 lg:h-64 lg:w-64"
                 src={getTrackFromUrl?.imageUrl}
                 alt=""
               />
-              <div className="order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start fadeShow2">
+              <div className="fadeShow2 order-1 flex flex-col items-center gap-3 lg:order-none lg:items-start">
                 <p className="text-3xl font-bold lg:text-5xl">
                   {getTrackFromUrl?.musicName}
                 </p>
                 <p className="lg:text-2xl">{getTrackFromUrl?.singer}</p>
-                <p className="">156.6k plays / 683 likes </p>
+                <p className="text-sm opacity-60">30-second preview</p>
               </div>
             </div>
-            <div className="flex w-full items-center justify-around gap-14  lg:justify-start lg:gap-9 fadeShow4">
+            <div className="fadeShow4 flex w-full items-center justify-around  gap-14 lg:justify-start lg:gap-9">
               <button
                 onClick={() => setPlayTrack(!playTrack)}
                 className="order-none text-6xl lg:order-1"
@@ -117,12 +117,12 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
               song.load();
               setTimeout(() => setPlayTrack(false), 300);
             }}
-            className="flex w-full items-center justify-between text-3xl lg:cursor-pointer  text-white"
+            className="flex w-full items-center justify-between text-3xl text-white  lg:cursor-pointer"
           >
             <AiOutlineClose />
           </div>
           <img
-            className="w-3/4 rounded-2xl lg:w-[80%] lg:cursor-pointer fadeShow1"
+            className="fadeShow1 w-3/4 rounded-2xl lg:w-[80%] lg:cursor-pointer"
             src={trackToPlay?.imageUrl}
             alt=""
           />

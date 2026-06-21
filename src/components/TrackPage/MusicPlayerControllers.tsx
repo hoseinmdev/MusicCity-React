@@ -264,7 +264,7 @@ const MusicPlayerControllers: React.FC<{
   //   else if (musicPlayerSetting.shuffle === "on") return <BiShuffle />;
   // };
   return (
-    <div className="flex h-full w-full flex-col justify-between gap-6 text-white lg:justify-center lg:gap-12 lg:pt-0 fadeShow2">
+    <div className="fadeShow2 flex h-full w-full flex-col justify-between gap-6 text-white lg:justify-center lg:gap-12 lg:pt-0">
       <MusicName />
 
       {/* TIME LINE */}
@@ -336,20 +336,20 @@ const MusicName = () => {
         position: "top-center",
         theme: "dark",
       });
-      isInFavorites(true);
+      setLiked(true);
     } else {
       const deleteFromFavorites = favoriteMusics
         ? JSON.parse(favoriteMusics).filter(
             (track: ITrack) => track.id !== trackToPlay?.id,
           )
         : "";
-        toast("Delete from favorites playlist 💔", {
-          autoClose: 2000,
-          position: "top-center",
-          theme: "dark",
-        });
+      toast("Delete from favorites playlist 💔", {
+        autoClose: 2000,
+        position: "top-center",
+        theme: "dark",
+      });
       localStorage.setItem("favorite", JSON.stringify(deleteFromFavorites));
-      isInFavorites(false);
+      setLiked(false);
     }
   };
   return (

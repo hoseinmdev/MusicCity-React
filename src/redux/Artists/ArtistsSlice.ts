@@ -40,40 +40,39 @@ const GENRE_SEARCHES: { term: string; genre: string }[] = [
 export const getArtists = createAsyncThunk<IArtist[]>(
   "artists/getArtists",
   async (): Promise<IArtist[]> => {
-    try {
-      const responses = await Promise.all(
-        GENRE_SEARCHES.map(({ term }) =>
-          axios.get<ItunesSearchResponse>(
-            `https://itunes.apple.com/search?term=${encodeURIComponent(
-              term,
-            )}&media=music&limit=12&country=us`,
-          ),
+    const settled = await Promise.allSettled(
+      GENRE_SEARCHES.map(({ term }) =>
+        axios.get<ItunesSearchResponse>(
+          `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&limit=12&country=us`,
         ),
-      );
+      ),
+    );
 
-      const artists: IArtist[] = [];
-      const seen = new Set<string>();
+    const artists: IArtist[] = [];
+    const seen = new Set<string>();
 
-      responses.forEach((res, i) => {
-        res.data.results.forEach((item) => {
-          const artistId = String(item.artistId);
-          if (!seen.has(artistId) && item.artworkUrl100 && item.artistId) {
-            seen.add(artistId);
-            artists.push({
-              id: artistId,
-              name: item.artistName,
-              followers: parseFloat((Math.random() * 90 + 0.5).toFixed(1)),
-              imageUrl: item.artworkUrl100.replace("100x100bb", "500x500bb"),
-              genre: GENRE_SEARCHES[i].genre,
-            });
-          }
-        });
+    settled.forEach((result, i) => {
+      if (result.status === "rejected") {
+        console.error(`Artists fetch failed for genre "${GENRE_SEARCHES[i].genre}":`, result.reason);
+        return;
+      }
+
+      result.value.data.results.forEach((item) => {
+        const artistId = String(item.artistId);
+        if (!seen.has(artistId) && item.artworkUrl100 && item.artistId) {
+          seen.add(artistId);
+          artists.push({
+            id: artistId,
+            name: item.artistName,
+            followers: parseFloat((Math.random() * 90 + 0.5).toFixed(1)),
+            imageUrl: item.artworkUrl100.replace("100x100bb", "500x500bb"),
+            genre: GENRE_SEARCHES[i].genre,
+          });
+        }
       });
+    });
 
-      return artists;
-    } catch {
-      return [];
-    }
+    return artists;
   },
 );
 

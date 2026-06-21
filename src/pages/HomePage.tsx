@@ -21,7 +21,6 @@ const HomePage: React.FC = () => {
   useEffect(() => {
     dispatch(getTracks());
     dispatch(getPlaylists());
-    
   }, []);
 
   const renderHomePage = () => {
@@ -34,7 +33,7 @@ const HomePage: React.FC = () => {
     } else if (!loading && tracks.length !== 0) {
       return (
         <SiteLayout>
-          <div className="flex w-full flex-col items-center justify-center gap-8 p-4 pb-14 lg:gap-10">
+          <div className="flex w-full flex-col items-start gap-8 p-4 pb-14 lg:gap-10">
             <Slider />
             <PlayLists playListsTitle="All Playlists" playLists={playlists} />
             <TracksList tracks={tracks} musicsState="new" title="New Songs" />

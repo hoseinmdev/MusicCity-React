@@ -17,7 +17,7 @@ const Slider: React.FC = () => {
   const slidesTracks = tracks.filter((t) => t.state === "top").slice(0, 5);
 
   return (
-    <div className="fadeShow flex flex-col items-center justify-center">
+    <div className="fadeShow flex w-full flex-col items-start">
       <div className="flex w-full items-center justify-between pl-4 lg:hidden">
         <div className="hidden dark:flex dark:justify-center">
           <SiteLogo />
@@ -25,7 +25,11 @@ const Slider: React.FC = () => {
         <img className="w-36 dark:hidden lg:hidden" src={siteLogoDark} />
         <ThemeChangerButton />
       </div>
-      <Swiper spaceBetween={20} slidesPerView={isMobile ? 1 : 3.85}>
+      <Swiper
+        className="w-full"
+        spaceBetween={20}
+        slidesPerView={isMobile ? 1 : 3.85}
+      >
         {slidesTracks.map((slide) => (
           <SwiperSlide
             key={slide.id}

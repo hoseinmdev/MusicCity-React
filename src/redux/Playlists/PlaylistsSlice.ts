@@ -5,6 +5,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import { itunesSearch } from "@/utils/itunesApi";
 import { ITrack } from "../Tracks/TracksSlice";
 
 export interface IPlaylist {
@@ -92,9 +93,11 @@ export const getPlaylists = createAsyncThunk<IPlaylist[]>(
       const responses = await Promise.all(
         PLAYLIST_CONFIGS.map(({ term }) =>
           axios.get<ItunesSearchResponse>(
-            `https://itunes.apple.com/search?term=${encodeURIComponent(
-              term,
-            )}&media=music&limit=20&country=us`,
+            itunesSearch(
+              `term=${encodeURIComponent(
+                term,
+              )}&media=music&limit=20&country=us`,
+            ),
           ),
         ),
       );

@@ -5,6 +5,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
+import { itunesSearch } from "@/utils/itunesApi";
 
 export interface IArtist {
   id: string;
@@ -43,7 +44,9 @@ export const getArtists = createAsyncThunk<IArtist[]>(
     const settled = await Promise.allSettled(
       GENRE_SEARCHES.map(({ term }) =>
         axios.get<ItunesSearchResponse>(
-          `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&media=music&limit=12&country=us`,
+          itunesSearch(
+            `term=${encodeURIComponent(term)}&media=music&limit=12&country=us`,
+          ),
         ),
       ),
     );
@@ -53,7 +56,10 @@ export const getArtists = createAsyncThunk<IArtist[]>(
 
     settled.forEach((result, i) => {
       if (result.status === "rejected") {
-        console.error(`Artists fetch failed for genre "${GENRE_SEARCHES[i].genre}":`, result.reason);
+        console.error(
+          `Artists fetch failed for genre "${GENRE_SEARCHES[i].genre}":`,
+          result.reason,
+        );
         return;
       }
 

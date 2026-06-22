@@ -20,8 +20,10 @@ const PlaylistPage: React.FC = () => {
   );
   const { playlist } = useParams();
   const currentPlaylist = playlists.find((p) => p.id === playlist);
-  const favoriteMusics = localStorage.getItem(`favorite`) || "";
-  console.log(favoriteMusics);
+  const favoriteMusicsRaw = localStorage.getItem("favorite");
+  const parsedFavorites: ITrack[] = favoriteMusicsRaw
+    ? JSON.parse(favoriteMusicsRaw)
+    : [];
   useEffect(() => {
     dispatch(getPlaylists());
   }, []);
@@ -35,7 +37,7 @@ const PlaylistPage: React.FC = () => {
   };
   return (
     <SiteLayout>
-      {!loading ? (
+      {!loading && (currentPlaylist || playlist === "yourFavoritesMusics") ? (
         <div className="relative flex h-full w-full flex-col dark:text-white">
           <FadeBackgroundImage imageUrl={renderPlaylistImage()} />
           {/* Content */}
@@ -51,7 +53,9 @@ const PlaylistPage: React.FC = () => {
                   {currentPlaylist?.title}
                 </p>
                 <p className="lg:text-2xl">
-                  {currentPlaylist?.followers}k followers
+                  {playlist === "yourFavoritesMusics"
+                    ? "yourself"
+                    : `${currentPlaylist?.followers}k followers`}
                 </p>
               </div>
             </div>
@@ -60,12 +64,12 @@ const PlaylistPage: React.FC = () => {
             <p className="opacity-70">Songs ...</p>
             <div className="flex h-full w-full flex-col items-center justify-start gap-3">
               {currentPlaylist?.tracks
-                ? currentPlaylist?.tracks.map((track) => {
-                    return <TrackLine key={track.id} {...track} />;
-                  })
-                : JSON.parse(favoriteMusics)?.map((track: ITrack) => {
-                    return <TrackLine key={track.id} {...track} />;
-                  })}
+                ? currentPlaylist.tracks.map((track) => (
+                    <TrackLine key={track.id} {...track} />
+                  ))
+                : parsedFavorites.map((track) => (
+                    <TrackLine key={track.id} {...track} />
+                  ))}
             </div>
           </div>
         </div>

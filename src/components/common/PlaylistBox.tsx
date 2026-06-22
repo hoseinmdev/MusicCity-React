@@ -2,7 +2,7 @@ import { PLAYLIST_PAGE } from "@/pathes";
 import { IPlaylist } from "@/redux/Playlists/PlaylistsSlice";
 import React from "react";
 import { Link } from "react-router-dom";
-import NostalogiaImage from "@/assets/Playlists/Nostalgia.jpg"
+import NostalogiaImage from "@/assets/Playlists/Nostalgia.jpg";
 
 const PlaylistBox: React.FC<IPlaylist> = ({
   id,
@@ -22,7 +22,9 @@ const PlaylistBox: React.FC<IPlaylist> = ({
       />
       <p className="text-sm lg:text-base">{title}</p>
       <p className="text-sm dark:opacity-60 lg:text-base">
-        followers: {followers + "k"}
+        {id === "yourFavoritesMusics"
+          ? "followers: yourself"
+          : `followers: ${followers}k`}
       </p>
     </Link>
   );

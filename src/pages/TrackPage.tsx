@@ -73,15 +73,18 @@ type TrackPlayerProps = {
 
 const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
   const location = useLocation();
-  const { track } = useParams();
-  const [show, setShow] = useState(false);
-  const [song, setSong] = useState(new Audio(location.state.url));
-  const [allTracks, setAllTracks] = useState<ITrack[]>([]);
   const params = useParams();
+  const { track } = params;
   const tracks = useSelector((state: RootState) => state.tracks.tracks);
   const playlists = useSelector(
     (state: RootState) => state.playlists.playlists,
   );
+  const trackFromRedux = tracks.find((t) => t.id === track);
+  const audioUrl = location.state?.url || trackFromRedux?.url || "";
+  const [show, setShow] = useState(false);
+  const [song, setSong] = useState(new Audio(audioUrl));
+  const [allTracks, setAllTracks] = useState<ITrack[]>([]);
+
   useEffect(() => {
     setTimeout(() => setShow(true), 200);
     if (params.playlist) {
@@ -92,7 +95,7 @@ const TrackPlayer = ({ playTrack, setPlayTrack }: TrackPlayerProps) => {
     }
   }, []);
   useEffect(() => {
-    setSong(new Audio(location.state.url));
+    setSong(new Audio(location.state?.url || trackFromRedux?.url || ""));
   }, [location]);
 
   const trackToPlay = tracks.find((t) => t.id === track);

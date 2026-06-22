@@ -1,28 +1,73 @@
-👋🏻 Hi, this is Hot Music Site 🎧🔥
+# Music City
 
-**_😵‍💫 With amazing feauters_**
+A Persian/international music streaming web app built with React and TypeScript. Streams live 30-second previews via the iTunes Search API — no API key required.
 
-1 - Full Responsive 💥<br />
-2- Have DarkMode & LightMode 🌓<br />
-3 - A lot of Musics (Pop , Rap , ...) 🎵<br />
-4 - A lot of Artists in artists page (Pop , Rap , ...) 👤<br />
-4 - Every Artist have a single page 🎩<br />
-5 - You can search your music 🔍<br />
-6 - You can download music from site 💛<br />
-7 - We have playlists of every genre 👑<br />
-8 - Every musics have a beautifull single page 🖼<br />
-9 - You Can Listen to your favorite playlist or music 👌🏻<br />
-10 - You Can have a playlist of your favorite musics !<br />
-11 - And ...
+## Features
 
-### You can visit **Music-City** online in : [LiveDemo](https://hosein-music-city.netlify.app/)<br />
+- **Live music data** — Fetches real tracks from the iTunes Search API (new releases + top hits)
+- **30-second previews** — In-browser audio player with play/pause, seek timeline, and prev/next navigation
+- **Favorites playlist** — Like any track to add it to a personal favorites playlist (persisted in localStorage)
+- **Playlists** — Browse curated genre playlists (Pop, Rap, Rock, Chill, Romantic, and more)
+- **Artists** — Artist directory with individual pages showing their tracks and follower count
+- **Search** — Real-time search by song name or artist name; browse by Genre and Mood categories
+- **Dark / Light mode** — Theme toggle, persisted across sessions
+- **Fully responsive** — Mobile-first layout that adapts to desktop
+- **Skeleton loading states** — Smooth placeholders on every page while data loads
+- **PWA support** — Installable as a progressive web app
 
-### **_Enjoy it 😉_**
+## Pages
 
-<br />
-<br />
+| Route           | Description                                                  |
+| --------------- | ------------------------------------------------------------ |
+| `/`             | Home — featured slider, playlists grid, New Songs, Top Songs |
+| `/artists`      | Artist directory                                             |
+| `/artist/:id`   | Single artist page with their tracks                         |
+| `/search`       | Search by track/artist; genre and mood browse                |
+| `/browse`       | Browse by category                                           |
+| `/track/:id`    | Track detail page with full audio player                     |
+| `/playlist/:id` | Playlist page (including "Your Favorites")                   |
 
-[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=27&duration=2000&pause=1000&color=ACACAC&repeat=false&width=468&height=41&lines=%F0%9F%92%8EWatch+my+another+projects)](https://git.io/typing-svg)
+## Tech Stack
 
-You can visit Digi-Hosein online in : [LiveDemo](https://hoseinshopcartreact.netlify.app)<br />
-You can visit Movie-City online in : [LiveDemo](https://movie-city-nextjs.netlify.app/)<br />
+- **React 18** + **TypeScript**
+- **Vite** — build tool and dev server
+- **Tailwind CSS** — utility-first styling
+- **Redux Toolkit** — global state (tracks, playlists, artists)
+- **React Router DOM v6** — client-side routing
+- **Axios** — HTTP requests to iTunes API
+- **MUI** — select UI components
+- **Swiper** — home page slider
+- **React Toastify** — toast notifications
+- **vite-plugin-pwa** — PWA / service worker
+
+## Project Structure
+
+```
+src/
+├── assets/          # Images (Playlists, SearchCategories, Slider) + Vazir font
+├── components/
+│   ├── common/      # Shared: TrackBox, TrackLine, ArtistAvatar, Skeleton, ...
+│   ├── HomePage/    # Slider, PlayLists, TracksList, ThemeChangerButton
+│   ├── SearchPage/  # Genres grid
+│   ├── TrackPage/   # MusicPlayerControllers, MoreMusics
+│   └── ArtistsPage/ # ArtistsList
+├── pages/           # One file per route
+├── redux/           # TracksSlice, PlaylistsSlice, ArtistsSlice
+├── layout/          # SiteLayout (Navbar + page wrapper)
+├── utils/           # itunesApi, saveToLocal, getFromLocal, getTrackFromUrl, ...
+└── db/              # genreMoods — static genre/mood category data
+```
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+The dev server proxies `/itunes/*` to `https://itunes.apple.com` (configured in `vite.config.ts`) to avoid CORS issues during development.
+
+```bash
+npm run build   # TypeScript compile + Vite production build
+npm run preview # Preview the production build locally
+```

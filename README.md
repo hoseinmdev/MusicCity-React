@@ -1,19 +1,21 @@
-# Music City
+# 🎧 Music City 🔥
 
 A Persian/international music streaming web app built with React and TypeScript. Streams live 30-second previews via the iTunes Search API — no API key required.
 
-## Features
+### 🌐 [Live Demo](https://hosein-music-city.netlify.app/)
 
-- **Live music data** — Fetches real tracks from the iTunes Search API (new releases + top hits)
-- **30-second previews** — In-browser audio player with play/pause, seek timeline, and prev/next navigation
-- **Favorites playlist** — Like any track to add it to a personal favorites playlist (persisted in localStorage)
-- **Playlists** — Browse curated genre playlists (Pop, Rap, Rock, Chill, Romantic, and more)
-- **Artists** — Artist directory with individual pages showing their tracks and follower count
-- **Search** — Real-time search by song name or artist name; browse by Genre and Mood categories
-- **Dark / Light mode** — Theme toggle, persisted across sessions
-- **Fully responsive** — Mobile-first layout that adapts to desktop
-- **Skeleton loading states** — Smooth placeholders on every page while data loads
-- **PWA support** — Installable as a progressive web app
+## ✨ Features
+
+- 🎵 **Live music data** — Fetches real tracks from the iTunes Search API (new releases + top hits)
+- ▶️ **30-second previews** — In-browser audio player with play/pause, seek timeline, and prev/next navigation
+- 💛 **Favorites playlist** — Like any track to add it to a personal favorites playlist (persisted in localStorage)
+- 👑 **Playlists** — Browse curated genre playlists (Pop, Rap, Rock, Chill, Romantic, and more)
+- 👤 **Artists** — Artist directory with individual pages showing their tracks and follower count
+- 🔍 **Search** — Real-time search by song name or artist name; browse by Genre and Mood categories
+- 🌓 **Dark / Light mode** — Theme toggle, persisted across sessions
+- 💥 **Fully responsive** — Mobile-first layout that adapts to desktop
+- ⚡ **Skeleton loading states** — Smooth placeholders on every page while data loads
+- 📱 **PWA support** — Installable as a progressive web app
 
 ## Pages
 

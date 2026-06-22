@@ -2,14 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: VazirFont;
-  src: url(assets/fonts/Vazir-FD.ttf);
-}
-
 * {
   transition: 0.2s;
-  font-family: "VazirFont" !important;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
 }
 .hideScrollbar {
   -ms-overflow-style: none; /* Internet Explorer 10+ */
@@ -81,7 +76,7 @@
     transform: translateX(-5rem);
     opacity: 0;
   }
-    60% {
+  60% {
     transform: translateX(-5rem);
     opacity: 0;
   }
@@ -99,7 +94,7 @@
     transform: translateX(-5rem);
     opacity: 0;
   }
-    80% {
+  80% {
     transform: translateX(-5rem);
     opacity: 0;
   }
@@ -117,7 +112,7 @@
     transform: translateY(15rem);
     opacity: 0;
   }
-    70% {
+  70% {
     transform: translateY(15rem);
     opacity: 0;
   }

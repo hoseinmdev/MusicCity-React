@@ -68,7 +68,7 @@ const TryAgain = () => {
       <p>We have some problems...</p>
       <button
         onClick={fetchData}
-        className="rounded-xl bg-neutral-700 px-10 py-2"
+        className="rounded-xl bg-neutral-700 px-10 py-2 text-white"
       >
         Try Again
       </button>

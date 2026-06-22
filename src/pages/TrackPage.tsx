@@ -15,12 +15,12 @@ import { ITrack, getTracks } from "@/redux/Tracks/TracksSlice";
 import GetTrackFromUrl from "@/utils/getTrackFromUrl";
 
 const TrackPage: React.FC = () => {
-  const { loading } = useSelector((state: RootState) => state.tracks);
+  const { tracks, loading } = useSelector((state: RootState) => state.tracks);
   const dispatch = useDispatch<AppDispatch>();
   const [playTrack, setPlayTrack] = useState(false);
   const getTrackFromUrl = GetTrackFromUrl();
   useEffect(() => {
-    dispatch(getTracks());
+    if (tracks.length === 0) dispatch(getTracks());
     saveToLocal("musicPlayerSetting", { repeat: "all", shuffle: "off" });
   }, []);
   return (

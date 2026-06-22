@@ -17,8 +17,8 @@ const TrackLine: React.FC<ITrack> = ({
   return (
     <Link
       to={`/${TRACK_PAGE}/${id}${playlist ? "/" + playlist : ""}`}
-      state={{ url }}
-      className={`flex min-h-[4rem] w-full items-center justify-between dark:text-white overflow-hidden rounded-md bg-neutral-300 dark:bg-gray-200/10 hover:bg-gray-400/20 dark:hover:bg-gray-200/50 lg:cursor-pointer ${
+      state={{ url, imageUrl, musicName, singer }}
+      className={`flex min-h-[4rem] w-full items-center justify-between overflow-hidden rounded-md bg-neutral-300 hover:bg-gray-400/20 dark:bg-gray-200/10 dark:text-white dark:hover:bg-gray-200/50 lg:cursor-pointer ${
         playingTrack?.musicName === musicName ? "bg-gray-200/50" : ""
       }`}
     >

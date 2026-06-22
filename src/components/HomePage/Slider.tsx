@@ -38,7 +38,12 @@ const Slider: React.FC = () => {
             <Link
               className="flex flex-col items-start justify-center gap-2"
               to={`/${TRACK_PAGE}/${slide.id}`}
-              state={{ url: slide.url }}
+              state={{
+                url: slide.url,
+                imageUrl: slide.imageUrl,
+                musicName: slide.musicName,
+                singer: slide.singer,
+              }}
             >
               <img
                 className="h-48 w-full rounded-xl object-cover transition-opacity duration-300 hover:opacity-70 lg:h-56"

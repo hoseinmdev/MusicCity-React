@@ -56,6 +56,7 @@ const MusicPlayerControllers: React.FC<{
       song.pause();
       song.removeEventListener("canplaythrough", disabledLoading);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [song]);
 
   const playMusic = () => {
@@ -190,7 +191,7 @@ const MusicPlayerControllers: React.FC<{
       );
     } else {
       const currentMusicIndex = allTracks.findIndex(
-        (track) => track.url === location.state.url,
+        (track) => track.url === location.state?.url,
       );
       const musicToPlay =
         allTracks[
@@ -263,38 +264,53 @@ const MusicPlayerControllers: React.FC<{
   //     );
   //   else if (musicPlayerSetting.shuffle === "on") return <BiShuffle />;
   // };
+  const fillPct = timeLineMax > 0 ? (timeLineValue / timeLineMax) * 100 : 0;
+
   return (
-    <div className="fadeShow2 flex h-full w-full flex-col justify-between gap-6 text-white lg:justify-center lg:gap-12 lg:pt-0">
+    <div className="fadeShow2 flex h-full w-full flex-col justify-between gap-8 text-white lg:justify-center lg:gap-10 lg:pt-0">
       <MusicName />
 
-      {/* TIME LINE */}
-      <div className="flex w-full flex-col gap-4">
+      {/* PROGRESS BAR */}
+      <div className="flex w-full flex-col gap-2">
         <input
           onChange={timeLineChangeHandler}
           min={0}
           max={timeLineMax}
           value={timeLineValue}
-          className="w-full appearance-none bg-transparent outline-none lg:cursor-pointer [&::-webkit-slider-runnable-track]:h-[4px] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-white/30 [&::-webkit-slider-thumb]:mt-[-6px] [&::-webkit-slider-thumb]:h-[16px] [&::-webkit-slider-thumb]:w-[16px] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white"
           type="range"
+          style={{
+            background: `linear-gradient(to right, white ${fillPct}%, rgba(255,255,255,0.25) ${fillPct}%)`,
+          }}
+          className="h-[4px] w-full cursor-pointer appearance-none rounded-full outline-none [&::-webkit-slider-runnable-track]:h-[4px] [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-transparent [&::-webkit-slider-thumb]:mt-[-6px] [&::-webkit-slider-thumb]:h-[16px] [&::-webkit-slider-thumb]:w-[16px] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-md"
         />
-        <div className="flex w-full justify-between">
-          <p>{musicCurrentTimeText}</p>
-          <p>{timeLineDuration}</p>
+        <div className="flex w-full justify-between text-xs text-white/60">
+          <span>{musicCurrentTimeText}</span>
+          <span>{timeLineDuration}</span>
         </div>
       </div>
-      {/* PLAY & PAUSE */}
-      <div className="flex w-full items-center justify-between text-2xl">
-        {/* <div onClick={repeatIconHandler}>{renderRepeatIcon()}</div> */}
-        <div onClick={() => changeMusic("prev")} className="lg:cursor-pointer">
+
+      {/* CONTROLS */}
+      <div className="flex w-full items-center justify-between">
+        <button
+          onClick={() => changeMusic("prev")}
+          className="rounded-full p-3 text-2xl text-white/70 transition-all hover:text-white lg:cursor-pointer"
+        >
           <AiFillStepBackward />
-        </div>
-        <div onClick={playPauseHandler} className="text-3xl lg:cursor-pointer">
+        </button>
+
+        <button
+          onClick={playPauseHandler}
+          className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl text-black shadow-lg transition-transform hover:scale-105 lg:cursor-pointer"
+        >
           {renderPlayIcon()}
-        </div>
-        <div onClick={() => changeMusic("next")} className="lg:cursor-pointer">
+        </button>
+
+        <button
+          onClick={() => changeMusic("next")}
+          className="rounded-full p-3 text-2xl text-white/70 transition-all hover:text-white lg:cursor-pointer"
+        >
           <AiFillStepForward />
-        </div>
-        {/* <div onClick={shuffleIconHandler}>{renderShuffleIcon()}</div> */}
+        </button>
       </div>
 
       <MusicOptions />
@@ -313,7 +329,7 @@ const MusicName = () => {
         )
       : "";
     setLiked(isInFavorites ? true : false);
-  }, []);
+  }, [trackToPlay?.id]);
   const addToFavoritesHandler = () => {
     const favoriteMusics = localStorage.getItem(`favorite`) || "";
     const isInFavorites = favoriteMusics

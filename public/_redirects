@@ -1,2 +1,4 @@
-/itunes/*  https://itunes.apple.com/:splat  200
-/*         /index.html                       200
+/itunes/*    https://itunes.apple.com/:splat             200
+/audio/*     https://audio-ssl.itunes.apple.com/:splat  200
+/imagecdn/*  https://is1-ssl.mzstatic.com/:splat        200
+/*           /index.html                                 200

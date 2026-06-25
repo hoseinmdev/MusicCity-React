@@ -5,7 +5,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { itunesSearch } from "@/utils/itunesApi";
+import { itunesSearch, proxyAudioUrl, proxyImageUrl } from "@/utils/itunesApi";
 
 export interface ITrack {
   id: string;
@@ -39,8 +39,8 @@ const mapItunesTrack = (item: ItunesTrackItem, state: string): ITrack => ({
   id: String(item.trackId),
   musicName: item.trackName,
   singer: item.artistName,
-  imageUrl: item.artworkUrl100.replace("100x100bb", "500x500bb"),
-  url: item.previewUrl ?? "",
+  imageUrl: proxyImageUrl(item.artworkUrl100.replace("100x100bb", "500x500bb")),
+  url: proxyAudioUrl(item.previewUrl ?? ""),
   state,
   genre: item.primaryGenreName.toLowerCase().replace(/[\s&/]/g, "") || "pop",
 });

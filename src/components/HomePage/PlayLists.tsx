@@ -8,7 +8,8 @@ const PlayLists: React.FC<{
   playLists: IPlaylist[];
   playListsTitle: string;
 }> = ({ playListsTitle, playLists }) => {
-  const isMobile = useMediaPredicate("(max-width: 1024px)");
+  const isMobile = useMediaPredicate("(max-width: 767px)");
+  const isDesktop = useMediaPredicate("(min-width: 1024px)");
   const favoriteMusics = localStorage.getItem(`favorite`) || "";
   const renderFavorites = () => {
     if (favoriteMusics && favoriteMusics.length > 2) {
@@ -48,7 +49,7 @@ const PlayLists: React.FC<{
       <Swiper
         className=" w-full lg:h-60"
         spaceBetween={20}
-        slidesPerView={isMobile ? 2.5 : 8.5}
+        slidesPerView={isDesktop ? 8.5 : isMobile ? 3.5 : 5.5}
       >
         <div className="flex w-full justify-between gap-4">
           {renderFavorites()}

@@ -5,39 +5,35 @@ import "swiper/css";
 import { useMediaPredicate } from "react-media-hook";
 import { ITrack } from "@/redux/Tracks/TracksSlice";
 
-
 const MoreMusics: React.FC<{ allTracks: ITrack[] }> = ({ allTracks }) => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
-  const renderMoreTracks = () => {
-    return allTracks.slice(0, 15).map((track) => {
-      return <TrackLine {...track} />;
-    });
-  };
-  const renderMobileMoreTracks = () => {
-    return (
-      <Swiper className="h-auto w-full rounded-xl" spaceBetween={10} slidesPerView={2.2}>
-        <div className="flex w-full justify-between gap-4">
-          {allTracks.slice(0, 15).map((track) => {
-            return (
-              <SwiperSlide key={track.musicName}>
-                <TrackBox {...track} />
-              </SwiperSlide>
-            );
-          })}
-        </div>
-      </Swiper>
-    );
-  };
-
   return (
     <>
-      <div className=" z-50 hidden max-h-full w-full flex-col items-start justify-start gap-5 overflow-auto  rounded-md p-2 lg:flex fadeShow3">
-        {renderMoreTracks()}
+      {/* Desktop: vertical list */}
+      <div className="fadeShow3 z-50 hidden max-h-full w-full flex-col items-start justify-start gap-2 overflow-auto rounded-xl p-2 lg:flex [&_a]:!bg-white/10 [&_a]:!text-white [&_a]:hover:!bg-white/20">
+        <p className="pb-1 text-sm font-medium uppercase tracking-widest text-white/60">
+          Up Next
+        </p>
+        {allTracks.slice(0, 15).map((track) => (
+          <TrackLine key={track.id} {...track} />
+        ))}
       </div>
-      <div className="z-40 h-72 w-full rounded-xl pb-[20rem] lg:hidden">
-        <p className="pb-2 text-white dark:text-gray-800 dark:opacity-70">More Musics...</p>
-        {isMobile ? renderMobileMoreTracks() : ""}
+
+      {/* Mobile: horizontal swiper */}
+      <div className="z-40 w-full pb-[20rem] lg:hidden">
+        <p className="pb-2 text-sm font-medium uppercase tracking-widest text-white/60">
+          Up Next
+        </p>
+        {isMobile && (
+          <Swiper className="h-auto w-full rounded-xl" spaceBetween={10} slidesPerView={2.5}>
+            {allTracks.slice(0, 15).map((track) => (
+              <SwiperSlide key={track.id}>
+                <TrackBox {...track} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
     </>
   );

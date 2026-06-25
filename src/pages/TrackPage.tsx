@@ -25,16 +25,15 @@ const TrackPage: React.FC = () => {
   }, []);
   return (
     <SiteLayout>
+      {/* Player renders independently — never unmounted by loading state */}
+      {playTrack && (
+        <TrackPlayer playTrack={playTrack} setPlayTrack={setPlayTrack} />
+      )}
       {!loading ? (
         <div className="relative flex h-full w-full flex-col">
-          {playTrack ? (
-            <TrackPlayer playTrack={playTrack} setPlayTrack={setPlayTrack} />
-          ) : (
-            ""
-          )}
           <FadeBackgroundImage imageUrl={getTrackFromUrl?.imageUrl} />
           {/* Content */}
-          <div className=" z-10 flex w-full flex-col gap-4 p-2 text-white dark:text-white lg:p-9">
+          <div className="z-10 flex w-full flex-col gap-4 p-2 text-white dark:text-white lg:p-9">
             <div className="flex w-full flex-col items-center justify-start gap-6 lg:flex-row lg:items-end">
               <img
                 className="fadeShow1 h-52 w-52 lg:h-64 lg:w-64"
@@ -49,7 +48,7 @@ const TrackPage: React.FC = () => {
                 <p className="text-sm opacity-60">30-second preview</p>
               </div>
             </div>
-            <div className="fadeShow4 flex w-full items-center justify-around  gap-14 lg:justify-start lg:gap-9">
+            <div className="fadeShow4 flex w-full items-center justify-around gap-14 lg:justify-start lg:gap-9">
               <button
                 onClick={() => setPlayTrack(!playTrack)}
                 className="order-none text-6xl lg:order-1"

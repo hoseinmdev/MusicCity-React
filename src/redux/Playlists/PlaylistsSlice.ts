@@ -5,7 +5,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { itunesSearch } from "@/utils/itunesApi";
+import { itunesSearch, proxyAudioUrl, proxyImageUrl } from "@/utils/itunesApi";
 import { ITrack } from "../Tracks/TracksSlice";
 
 export interface IPlaylist {
@@ -112,8 +112,8 @@ export const getPlaylists = createAsyncThunk<IPlaylist[]>(
               id: String(item.trackId),
               musicName: item.trackName,
               singer: item.artistName,
-              imageUrl: item.artworkUrl100.replace("100x100bb", "500x500bb"),
-              url: item.previewUrl ?? "",
+              imageUrl: proxyImageUrl(item.artworkUrl100.replace("100x100bb", "500x500bb")),
+              url: proxyAudioUrl(item.previewUrl ?? ""),
               genre: config.genre,
               state: "playlist",
             }),

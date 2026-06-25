@@ -12,7 +12,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store";
 
 const Slider: React.FC = () => {
-  const isMobile = useMediaPredicate("(max-width: 1024px)");
+  const isMobile = useMediaPredicate("(max-width: 767px)");
+  const isDesktop = useMediaPredicate("(min-width: 1024px)");
   const tracks = useSelector((state: RootState) => state.tracks.tracks);
   const slidesTracks = tracks.filter((t) => t.state === "top").slice(0, 5);
 
@@ -28,7 +29,7 @@ const Slider: React.FC = () => {
       <Swiper
         className="w-full"
         spaceBetween={20}
-        slidesPerView={isMobile ? 1 : 3.85}
+        slidesPerView={isDesktop ? 3.85 : isMobile ? 1.5 : 2.5}
       >
         {slidesTracks.map((slide) => (
           <SwiperSlide

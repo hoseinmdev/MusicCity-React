@@ -10,15 +10,16 @@ const TracksList: React.FC<{
   title: string;
   musicsState: string;
 }> = ({ tracks, title, musicsState }) => {
-  const isMobile = useMediaPredicate("(max-width: 1024px)");
+  const isMobile = useMediaPredicate("(max-width: 767px)");
+  const isDesktop = useMediaPredicate("(min-width: 1024px)");
 
   return (
     <div className="flex  w-full flex-col items-start gap-2 fadeShow2">
       <p className="text-lg italic dark:text-white dark:opacity-70 lg:text-2xl">• {title}</p>
       <Swiper
         className="h-auto w-[100%]"
-        spaceBetween={isMobile ? 10 : 30}
-        slidesPerView={isMobile ? 2.5 : 8}
+        spaceBetween={isDesktop ? 30 : isMobile ? 10 : 16}
+        slidesPerView={isDesktop ? 8 : isMobile ? 3.5 : 5.5}
       >
         <div className="flex w-full justify-between gap-4">
           {tracks.map((track) => {

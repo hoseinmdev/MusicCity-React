@@ -5,7 +5,7 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import axios from "axios";
-import { itunesSearch } from "@/utils/itunesApi";
+import { itunesSearch, proxyImageUrl } from "@/utils/itunesApi";
 
 export interface IArtist {
   id: string;
@@ -71,7 +71,7 @@ export const getArtists = createAsyncThunk<IArtist[]>(
             id: artistId,
             name: item.artistName,
             followers: parseFloat((Math.random() * 90 + 0.5).toFixed(1)),
-            imageUrl: item.artworkUrl100.replace("100x100bb", "500x500bb"),
+            imageUrl: proxyImageUrl(item.artworkUrl100.replace("100x100bb", "500x500bb")),
             genre: GENRE_SEARCHES[i].genre,
           });
         }

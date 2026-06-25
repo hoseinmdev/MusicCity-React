@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(cd \"d:\\\\Projects\\\\MusicCity-React\"; ls node_modules | Where-Object { $_.Name -in @\\(\"husky\",\"lint-staged\",\"eslint-config-prettier\"\\) } | Select-Object Name)",
+      "Bash(git -C \"d:/Projects/MusicCity-React\" status)",
+      "Bash(git -C \"d:/Projects/MusicCity-React\" log --oneline -3)"
+    ],
+    "additionalDirectories": [
+      "d:\\Projects\\MusicCity-React\\.husky"
+    ]
+  }
+}

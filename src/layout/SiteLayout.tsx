@@ -1,6 +1,7 @@
 import { FC, ReactNode } from "react";
 import Main from "../components/Main";
 import Navbar from "../components/Navbar";
+import MiniPlayer from "../components/MiniPlayer";
 
 interface SiteLayoutProps {
   children: ReactNode;
@@ -11,6 +12,7 @@ const SiteLayout: FC<SiteLayoutProps> = ({ children }) => {
     <div className="flex w-full h-screen">
       <Navbar />
       <Main>{children}</Main>
+      <MiniPlayer />
     </div>
   );
 };

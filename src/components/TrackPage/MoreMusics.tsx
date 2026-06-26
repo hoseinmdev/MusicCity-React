@@ -16,7 +16,7 @@ const MoreMusics: React.FC<{ allTracks: ITrack[] }> = ({ allTracks }) => {
           Up Next
         </p>
         {allTracks.slice(0, 15).map((track) => (
-          <TrackLine key={track.id} {...track} />
+          <TrackLine key={track.id} {...track} queue={allTracks} />
         ))}
       </div>
 
@@ -29,7 +29,7 @@ const MoreMusics: React.FC<{ allTracks: ITrack[] }> = ({ allTracks }) => {
           <Swiper className="h-auto w-full rounded-xl" spaceBetween={10} slidesPerView={2.5}>
             {allTracks.slice(0, 15).map((track) => (
               <SwiperSlide key={track.id}>
-                <TrackBox {...track} />
+                <TrackBox {...track} queue={allTracks} />
               </SwiperSlide>
             ))}
           </Swiper>

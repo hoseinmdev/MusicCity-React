@@ -1,17 +1,20 @@
 import Slider from "@/components/HomePage/Slider";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SiteLayout from "@/layout/SiteLayout";
 import Skeleton from "@/components/common/Skeleton";
 import createEmptyArray from "@/utils/createEmptyArray";
 import { useMediaPredicate } from "react-media-hook";
 import PlayLists from "@/components/HomePage/PlayLists";
 import TracksList from "@/components/HomePage/TracksList";
-// import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/store";
+import type { AppDispatch, RootState } from "@/store";
 import Footer from "@/components/Footer";
 import { getTracks } from "@/redux/Tracks/TracksSlice";
 import { getPlaylists } from "@/redux/Playlists/PlaylistsSlice";
+import { getRecentlyPlayed } from "@/utils/recentlyPlayed";
+import { TrackBox } from "@/components/common";
+import type { ITrack } from "@/redux/Tracks/TracksSlice";
+
 const HomePage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { tracks, loading } = useSelector((state: RootState) => state.tracks);
@@ -35,6 +38,7 @@ const HomePage: React.FC = () => {
         <SiteLayout>
           <div className="flex w-full flex-col items-start gap-8 p-4 pb-14 lg:gap-10">
             <Slider />
+            <RecentlyPlayedSection />
             <PlayLists playListsTitle="All Playlists" playLists={playlists} />
             <TracksList tracks={tracks} musicsState="new" title="New Songs" />
             <TracksList tracks={tracks} musicsState="top" title="Top Songs" />
@@ -54,6 +58,36 @@ const HomePage: React.FC = () => {
   };
   return renderHomePage();
 };
+
+const RecentlyPlayedSection: React.FC = () => {
+  const [recent, setRecent] = useState<ITrack[]>([]);
+  const currentTrackId = useSelector(
+    (state: RootState) => state.player.currentTrack?.id,
+  );
+
+  // Refresh list whenever a new track starts playing
+  useEffect(() => {
+    setRecent(getRecentlyPlayed());
+  }, [currentTrackId]);
+
+  if (recent.length === 0) return null;
+
+  return (
+    <div className="flex w-full flex-col items-start gap-2 fadeShow">
+      <p className="text-lg italic dark:text-white dark:opacity-70 lg:text-2xl">
+        • Recently Played
+      </p>
+      <div className="hideScrollbar flex w-full gap-4 overflow-x-auto pb-2">
+        {recent.map((track) => (
+          <div key={track.id} className="w-32 flex-shrink-0 lg:w-40">
+            <TrackBox {...track} queue={recent} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const TryAgain = () => {
   const dispatch = useDispatch<AppDispatch>();
   const fetchData = () => {
@@ -76,53 +110,48 @@ const HomePageSkeleton = () => {
   const isMobile = useMediaPredicate("(max-width: 1024px)");
 
   return (
-    <div className=" flex h-full w-full flex-col justify-start gap-10 p-4 lg:justify-between lg:gap-4">
+    <div className="flex h-full w-full flex-col justify-start gap-10 p-4 lg:justify-between lg:gap-4">
       <div className="flex w-full justify-start lg:hidden">
         <Skeleton className="h-8 w-32 rounded-[6rem]" />
       </div>
       <div className="flex w-full items-center justify-center gap-3">
-        {createEmptyArray(isMobile ? 1 : 4).map((_, index) => {
-          return (
-            <div
-              key={index}
-              className="flex w-full flex-col items-start justify-center gap-2"
-            >
-              <Skeleton className="h-44 w-full rounded-2xl" />
-              <Skeleton className="h-4 w-[30%] rounded-2xl" />
-              <Skeleton className="h-4 w-[20%] rounded-2xl" />
-            </div>
-          );
-        })}
+        {createEmptyArray(isMobile ? 1 : 4).map((_, index) => (
+          <div
+            key={index}
+            className="flex w-full flex-col items-start justify-center gap-2"
+          >
+            <Skeleton className="h-44 w-full rounded-2xl" />
+            <Skeleton className="h-4 w-[30%] rounded-2xl" />
+            <Skeleton className="h-4 w-[20%] rounded-2xl" />
+          </div>
+        ))}
       </div>
       <div className="flex w-full items-center justify-center gap-3">
-        {createEmptyArray(isMobile ? 3 : 9).map((_, index) => {
-          return (
-            <div
-              key={index}
-              className="flex w-full flex-col items-center justify-center gap-2 pt-10 lg:pt-0"
-            >
-              <Skeleton className="h-[6.5rem] w-[6.5rem] rounded-2xl lg:h-44 lg:w-full" />
-              <Skeleton className="h-4 w-[60%] rounded-2xl" />
-              <Skeleton className="h-4 w-[30%] rounded-2xl" />
-            </div>
-          );
-        })}
+        {createEmptyArray(isMobile ? 3 : 9).map((_, index) => (
+          <div
+            key={index}
+            className="flex w-full flex-col items-center justify-center gap-2 pt-10 lg:pt-0"
+          >
+            <Skeleton className="h-[6.5rem] w-[6.5rem] rounded-2xl lg:h-44 lg:w-full" />
+            <Skeleton className="h-4 w-[60%] rounded-2xl" />
+            <Skeleton className="h-4 w-[30%] rounded-2xl" />
+          </div>
+        ))}
       </div>
       <div className="hidden w-full items-center justify-center gap-3 lg:flex">
-        {createEmptyArray(isMobile ? 3 : 9).map((_, index) => {
-          return (
-            <div
-              key={index}
-              className="flex w-full flex-col items-center justify-center gap-2"
-            >
-              <Skeleton className="h-[6.5rem] w-[6.5rem] rounded-2xl lg:h-44 lg:w-full" />
-              <Skeleton className="h-4 w-[60%] rounded-2xl" />
-              <Skeleton className="h-4 w-[20%] rounded-2xl" />
-            </div>
-          );
-        })}
+        {createEmptyArray(isMobile ? 3 : 9).map((_, index) => (
+          <div
+            key={index}
+            className="flex w-full flex-col items-center justify-center gap-2"
+          >
+            <Skeleton className="h-[6.5rem] w-[6.5rem] rounded-2xl lg:h-44 lg:w-full" />
+            <Skeleton className="h-4 w-[60%] rounded-2xl" />
+            <Skeleton className="h-4 w-[20%] rounded-2xl" />
+          </div>
+        ))}
       </div>
     </div>
   );
 };
+
 export default HomePage;
